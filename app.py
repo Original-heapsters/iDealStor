@@ -1,3 +1,7 @@
+from type_of_food import TypeOfFood
+from food_survival import FoodSurvival
+from storage_location import StorageLocation
+from forecast import Forecast
 from flask import Flask, render_template, request
 
 
@@ -18,6 +22,10 @@ def index():
 
 @app.route('/type_of_food', methods=['GET','POST'])
 def type_of_food():
+
+    typeOfFood = TypeOfFood()
+    typeOfFood.hello()
+
     if request.method == 'POST':
         args = []
         args.append(request.form['firstname'])
@@ -29,6 +37,10 @@ def type_of_food():
 
 @app.route('/food_survival', methods=['GET','POST'])
 def food_survival():
+
+    foodSurvival = FoodSurvival()
+    foodSurvival.hello()
+
     if request.method == 'POST':
         args = []
         args.append(request.form['firstname'])
@@ -40,6 +52,10 @@ def food_survival():
 
 @app.route('/storage_location', methods=['GET','POST'])
 def storage_location():
+
+    storageLocation = StorageLocation()
+    storageLocation.hello()
+
     if request.method == 'POST':
         args = []
         args.append(request.form['firstname'])
@@ -50,6 +66,10 @@ def storage_location():
 
 @app.route('/forecast', methods=['GET','POST'])
 def forecast():
+
+    forecaster = Forecast()
+    forecaster.hello()
+
     if request.method == 'POST':
         args = []
         args.append(request.form['firstname'])
