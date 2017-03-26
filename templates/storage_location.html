@@ -1,4 +1,5 @@
 {% extends "layout.html" %} {% block body %}
+
 <div class=main>
     <h1>Storage Location</h1>
     {% if args is not none %}
@@ -6,14 +7,33 @@
         <p> {{ arg }} </p>
       {% endfor %}
     {% endif %}
+    <table>
+  <tr>
+    <th>Company</th>
+    <th>Contact</th>
+    <th>Country</th>
+  </tr>
+  <tr>
+    <td>Alfreds Futterkiste</td>
+    <td>Maria Anders</td>
+    <td>Germany</td>
+  </tr>
+</table>
+    <p>AVG MAX: {{ tempMax }}</p>
+    <p>AVG MIN: {{ tempMin }}</p>
+    <p>AVG TEMP: {{ temp }}</p>
+    <p>HUMIDITY: {{ humidity }}</p>
+    {{googlemap("simple-map", lat, long, varname="simplemap")}}
+</div>
 </div>
 <div class=aside>
     <h3>Config data</h3>
+
     <form method="post" action="{{ url_for('storage_location') }}">
-        First name:<br>
-        <input type="text" name="firstname">
-        <br> Last name:<br>
-        <input type="text" name="lastname">
+        Latitude:<br>
+        <input type="text" name="latitude" value="34.007597">
+        <br> Longitude:<br>
+        <input type="text" name="longitude" value="-118.431089">
         <br>
         <input type="submit" value="Submit">
     </form>

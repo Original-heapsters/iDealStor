@@ -5,9 +5,11 @@ from food_survival import FoodSurvival
 from storage_location import StorageLocation
 from forecast import Forecast
 from flask import Flask, render_template, request
+from flask.ext.googlemaps import GoogleMaps
 
 
 app = Flask(__name__)
+GoogleMaps(app, key="AIzaSyDnDdKk8h8ipdZFyLMBeCUSbdPcShUNQjI")
 UPLOAD_FOLDER = './static/uploads/'
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif', 'csv'])
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -63,10 +65,21 @@ def storage_location():
     storageLocation.hello()
 
     if request.method == 'POST':
+        lat = request.form['latitude']
+        long = request.form['longitude']
         args = []
-        args.append(request.form['firstname'])
-        args.append(request.form['lastname'])
-        return render_template('storage_location.html', args=args)
+        args.append(request.form['longitude'])
+        args.append(request.form['latitude'])
+
+        tempMax,tempMin,temp,humidity = storageLocation.getWeather(lat,long)
+        return render_template('storage_location.html',
+        args=args,
+        tempMax=tempMax,
+        tempMin=tempMin,
+        temp=temp,
+        humidity=humidity, 
+        lat=lat,
+        long=long)
     else:
         return render_template('storage_location.html')
 

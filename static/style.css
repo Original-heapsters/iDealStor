@@ -72,6 +72,11 @@ a:active { color: red; }
 /* -----------------------
 Layout styles
 ------------------------*/
+.map
+{
+	width:700px;
+	height: 500px;
+}
 
 .container
 {
