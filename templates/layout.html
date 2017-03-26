@@ -2,6 +2,7 @@
 <html>
 <title>iDealStor</title>
 <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <div class=header>
     <div class=container>
         <h1 class=header-heading><a href="{{ url_for('index') }}">iDealStor</a></h1>
@@ -19,7 +20,9 @@
 </div>
 <div class=content>
     <div class=container>
+      <center>
         {% block body %}{% endblock %}
+      </center>
     </div>
 </div>
 </div>

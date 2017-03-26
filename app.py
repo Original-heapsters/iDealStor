@@ -1,3 +1,5 @@
+import os
+import json
 from type_of_food import TypeOfFood
 from food_survival import FoodSurvival
 from storage_location import StorageLocation
@@ -25,14 +27,18 @@ def type_of_food():
 
     typeOfFood = TypeOfFood()
     typeOfFood.hello()
+    crops = {}
+
 
     if request.method == 'POST':
+        if request.files is not None:
+            crops = json.loads(typeOfFood.getCropCSV())
         args = []
-        args.append(request.form['firstname'])
-        args.append(request.form['lastname'])
-        return render_template('type_of_food.html', args=args)
+        args.append(request.form['TYPEOFFOOD'])
+        return render_template('type_of_food.html', args=args, crops=crops)
     else:
-        return render_template('type_of_food.html')
+        crops = typeOfFood.getCropJSON(os.path.abspath('./CropTypes.json'))
+        return render_template('type_of_food.html', crops=crops)
 
 
 @app.route('/food_survival', methods=['GET','POST'])
