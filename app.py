@@ -55,7 +55,7 @@ def storage_location():
 
     storageLocation = StorageLocation()
     storageLocation.hello()
-    storageLocation.map()
+    #storageLocation.map()
     if request.method == 'POST':
         args = []
         args.append(request.form['firstname'])
