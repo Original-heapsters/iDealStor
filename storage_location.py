@@ -71,7 +71,7 @@ class StorageLocation:
         df.head()
         limits = [(0,19),(20,60),(61,90),(91,150),(151,200)]
         colors = ["rgb(0,116,217)","rgb(255,65,54)","rgb(133,20,75)","rgb(255,133,27)","lightgrey"]
-        Ideal_Colors = ["rgb(133,20,75)","rgb(0,116,217)","rgb(255,0,255)","rgb(124,252,0)"]
+        Ideal_Colors = ["rgb(244,164,96)","rgb(255,0,255)","rgb(255,255,0)","rgb(124,252,0)"]
         cities = []
         scale = 5000
 
@@ -102,7 +102,7 @@ class StorageLocation:
                     name='humidity',
                     marker=Marker(
                         size=df['Avg_Humidity']/10,
-                        color='rgb(255, 0, 0)',
+                        color='rgb(124,252,0)',
                         opacity=0.7
                     ),
                     text=df['Avg_Humidity'],
@@ -114,7 +114,7 @@ class StorageLocation:
                     name='avg temp',
                     marker=Marker(
                         size=df['Avg_Temp']/10,
-                        color='rgb(255, 255, 0)',
+                        color='rgb(255,20,147)',
                         opacity=0.7
                     ),
                     text=df['Avg_Temp'],
@@ -126,7 +126,7 @@ class StorageLocation:
                     name='avg max temp',
                     marker=Marker(
                         size=df['Avg_Temp_Max']/10,
-                        color='rgb(255, 0, 255)',
+                        color='rgb(255,0,0)',
                         opacity=0.7
                     ),
                     text=df['Avg_Temp_Max'],
@@ -138,7 +138,7 @@ class StorageLocation:
                     name='avg min temp',
                     marker=Marker(
                         size=df['Avg_Temp_Min']/10,
-                        color='rgb(134, 234, 234)',
+                        color='rgb(30,144,255)',
                         opacity=0.7
                     ),
                     text=df['Avg_Temp_Min'],
@@ -164,7 +164,7 @@ class StorageLocation:
                     name='Rice Ideal Score',
                     marker=Marker(
                         size=df['rice'] * 5,
-                        color=Ideal_Colors[0],
+                        color=Ideal_Colors[1],
                         opacity=0.7
                     ),
                     text=df['rice'],
@@ -177,7 +177,7 @@ class StorageLocation:
                     name='Corn Ideal Score',
                     marker=Marker(
                         size=df['corn'] * 5,
-                        color=Ideal_Colors[0],
+                        color=Ideal_Colors[2],
                         opacity=0.7
                     ),
                     text=df['corn'],
@@ -212,7 +212,7 @@ class StorageLocation:
                     name='humidity',
                     marker=Marker(
                         size=df['Avg_Humidity']/10,
-                        color='rgb(255, 0, 0)',
+                        color='rgb(124,252,0)',
                         opacity=0.7
                     ),
                     text=df['Avg_Humidity'],
@@ -224,7 +224,7 @@ class StorageLocation:
                     name='avg temp',
                     marker=Marker(
                         size=df['Avg_Temp']/10,
-                        color='rgb(255, 255, 0)',
+                        color='rgb(255,20,147)',
                         opacity=0.7
                     ),
                     text=df['Avg_Temp'],
@@ -236,7 +236,7 @@ class StorageLocation:
                     name='avg max temp',
                     marker=Marker(
                         size=df['Avg_Temp_Max']/10,
-                        color='rgb(255, 0, 255)',
+                        color='rgb(255,0,0)',
                         opacity=0.7
                     ),
                     text=df['Avg_Temp_Max'],
@@ -248,7 +248,7 @@ class StorageLocation:
                     name='avg min temp',
                     marker=Marker(
                         size=df['Avg_Temp_Min']/10,
-                        color='rgb(134, 234, 234)',
+                        color='rgb(30,144,255)',
                         opacity=0.7
                     ),
                     text=df['Avg_Temp_Min'],
@@ -274,7 +274,7 @@ class StorageLocation:
                     name='Rice Ideal Score',
                     marker=Marker(
                         size=df['rice'] * 5,
-                        color=Ideal_Colors[0],
+                        color=Ideal_Colors[1],
                         opacity=0.7
                     ),
                     text=df['rice'],
@@ -309,7 +309,7 @@ class StorageLocation:
                     name='humidity',
                     marker=Marker(
                         size=df['Avg_Humidity']/10,
-                        color='rgb(255, 0, 0)',
+                        color='rgb(124,252,0)',
                         opacity=0.7
                     ),
                     text=df['Avg_Humidity'],
@@ -321,7 +321,7 @@ class StorageLocation:
                     name='avg temp',
                     marker=Marker(
                         size=df['Avg_Temp']/10,
-                        color='rgb(255, 255, 0)',
+                        color='rgb(255,20,147)',
                         opacity=0.7
                     ),
                     text=df['Avg_Temp'],
@@ -333,7 +333,7 @@ class StorageLocation:
                     name='avg max temp',
                     marker=Marker(
                         size=df['Avg_Temp_Max']/10,
-                        color='rgb(255, 0, 255)',
+                        color='rgb(255,0,0)',
                         opacity=0.7
                     ),
                     text=df['Avg_Temp_Max'],
@@ -345,7 +345,7 @@ class StorageLocation:
                     name='avg min temp',
                     marker=Marker(
                         size=df['Avg_Temp_Min']/10,
-                        color='rgb(134, 234, 234)',
+                        color='rgb(30,144,255)',
                         opacity=0.7
                     ),
                     text=df['Avg_Temp_Min'],
@@ -371,7 +371,7 @@ class StorageLocation:
                     name='Corn Ideal Score',
                     marker=Marker(
                         size=df['corn'] * 5,
-                        color=Ideal_Colors[0],
+                        color=Ideal_Colors[2],
                         opacity=0.7
                     ),
                     text=df['corn'],
@@ -406,7 +406,7 @@ class StorageLocation:
                     name='humidity',
                     marker=Marker(
                         size=df['Avg_Humidity']/10,
-                        color='rgb(255, 0, 0)',
+                        color='rgb(124,252,0)',
                         opacity=0.7
                     ),
                     text=df['Avg_Humidity'],
@@ -418,7 +418,7 @@ class StorageLocation:
                     name='avg temp',
                     marker=Marker(
                         size=df['Avg_Temp']/10,
-                        color='rgb(255, 255, 0)',
+                        color='rgb(255,20,147)',
                         opacity=0.7
                     ),
                     text=df['Avg_Temp'],
@@ -430,7 +430,7 @@ class StorageLocation:
                     name='avg max temp',
                     marker=Marker(
                         size=df['Avg_Temp_Max']/10,
-                        color='rgb(255, 0, 255)',
+                        color='rgb(255,0,0)',
                         opacity=0.7
                     ),
                     text=df['Avg_Temp_Max'],
@@ -442,7 +442,7 @@ class StorageLocation:
                     name='avg min temp',
                     marker=Marker(
                         size=df['Avg_Temp_Min']/10,
-                        color='rgb(134, 234, 234)',
+                        color='rgb(30,144,255)',
                         opacity=0.7
                     ),
                     text=df['Avg_Temp_Min'],
@@ -455,7 +455,7 @@ class StorageLocation:
                     name='Corn Ideal Score',
                     marker=Marker(
                         size=df['corn'] * 5,
-                        color=Ideal_Colors[0],
+                        color=Ideal_Colors[2],
                         opacity=0.7
                     ),
                     text=df['corn'],
@@ -468,7 +468,7 @@ class StorageLocation:
                     name='Rice Ideal Score',
                     marker=Marker(
                         size=df['rice'] * 5,
-                        color=Ideal_Colors[0],
+                        color=Ideal_Colors[1],
                         opacity=0.7
                     ),
                     text=df['rice'],
@@ -503,7 +503,7 @@ class StorageLocation:
                     name='humidity',
                     marker=Marker(
                         size=df['Avg_Humidity']/10,
-                        color='rgb(255, 0, 0)',
+                        color='rgb(124,252,0)',
                         opacity=0.7
                     ),
                     text=df['Avg_Humidity'],
@@ -515,7 +515,7 @@ class StorageLocation:
                     name='avg temp',
                     marker=Marker(
                         size=df['Avg_Temp']/10,
-                        color='rgb(255, 255, 0)',
+                        color='rgb(255,20,147)',
                         opacity=0.7
                     ),
                     text=df['Avg_Temp'],
@@ -527,7 +527,7 @@ class StorageLocation:
                     name='avg max temp',
                     marker=Marker(
                         size=df['Avg_Temp_Max']/10,
-                        color='rgb(255, 0, 255)',
+                        color='rgb(255,0,0)',
                         opacity=0.7
                     ),
                     text=df['Avg_Temp_Max'],
@@ -539,7 +539,7 @@ class StorageLocation:
                     name='avg min temp',
                     marker=Marker(
                         size=df['Avg_Temp_Min']/10,
-                        color='rgb(134, 234, 234)',
+                        color='rgb(30,144,255)',
                         opacity=0.7
                     ),
                     text=df['Avg_Temp_Min'],
@@ -552,7 +552,7 @@ class StorageLocation:
                     name='Corn Ideal Score',
                     marker=Marker(
                         size=df['corn'] * 5,
-                        color=Ideal_Colors[0],
+                        color=Ideal_Colors[2],
                         opacity=0.7
                     ),
                     text=df['corn'],
@@ -587,7 +587,7 @@ class StorageLocation:
                     name='humidity',
                     marker=Marker(
                         size=df['Avg_Humidity']/10,
-                        color='rgb(255, 0, 0)',
+                        color='rgb(124,252,0)',
                         opacity=0.7
                     ),
                     text=df['Avg_Humidity'],
@@ -599,7 +599,7 @@ class StorageLocation:
                     name='avg temp',
                     marker=Marker(
                         size=df['Avg_Temp']/10,
-                        color='rgb(255, 255, 0)',
+                        color='rgb(255,20,147)',
                         opacity=0.7
                     ),
                     text=df['Avg_Temp'],
@@ -611,7 +611,7 @@ class StorageLocation:
                     name='avg max temp',
                     marker=Marker(
                         size=df['Avg_Temp_Max']/10,
-                        color='rgb(255, 0, 255)',
+                        color='rgb(255,0,0)',
                         opacity=0.7
                     ),
                     text=df['Avg_Temp_Max'],
@@ -623,7 +623,7 @@ class StorageLocation:
                     name='avg min temp',
                     marker=Marker(
                         size=df['Avg_Temp_Min']/10,
-                        color='rgb(134, 234, 234)',
+                        color='rgb(30,144,255)',
                         opacity=0.7
                     ),
                     text=df['Avg_Temp_Min'],
@@ -636,7 +636,7 @@ class StorageLocation:
                     name='Rice Ideal Score',
                     marker=Marker(
                         size=df['rice'] * 5,
-                        color=Ideal_Colors[0],
+                        color=Ideal_Colors[1],
                         opacity=0.7
                     ),
                     text=df['rice'],
@@ -670,7 +670,7 @@ class StorageLocation:
                     name='humidity',
                     marker=Marker(
                         size=df['Avg_Humidity']/10,
-                        color='rgb(255, 0, 0)',
+                        color='rgb(124,252,0)',
                         opacity=0.7
                     ),
                     text=df['Avg_Humidity'],
@@ -682,7 +682,7 @@ class StorageLocation:
                     name='avg temp',
                     marker=Marker(
                         size=df['Avg_Temp']/10,
-                        color='rgb(255, 255, 0)',
+                        color='rgb(255,20,147)',
                         opacity=0.7
                     ),
                     text=df['Avg_Temp'],
@@ -694,7 +694,7 @@ class StorageLocation:
                     name='avg max temp',
                     marker=Marker(
                         size=df['Avg_Temp_Max']/10,
-                        color='rgb(255, 0, 255)',
+                        color='rgb(255,0,0)',
                         opacity=0.7
                     ),
                     text=df['Avg_Temp_Max'],
@@ -706,7 +706,7 @@ class StorageLocation:
                     name='avg min temp',
                     marker=Marker(
                         size=df['Avg_Temp_Min']/10,
-                        color='rgb(134, 234, 234)',
+                        color='rgb(30,144,255)',
                         opacity=0.7
                     ),
                     text=df['Avg_Temp_Min'],
