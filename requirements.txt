@@ -3,6 +3,7 @@ click==6.7
 decorator==4.0.11
 enum34==1.1.6
 Flask==0.12
+Flask-GoogleMaps==0.2.4
 functools32==3.2.3.post2
 ipython-genutils==0.2.0
 itsdangerous==0.24
