@@ -152,7 +152,7 @@ class StorageLocation:
                         if self.acceptable(line['Avg_Humidity'], data[3], 10):
                             idealCount += 1
                         print 'IdealScore ' + str(idealCount)
-                #print(line['Latitude'], line['Longitude'], line['Avg_Humidity'], line['Avg_Temp'], line['Avg_Temp_Max'], line['Avg_Temp_Min'])
+                #print(line['giLatitude'], line['Longitude'], line['Avg_Humidity'], line['Avg_Temp'], line['Avg_Temp_Max'], line['Avg_Temp_Min'])
 
 
 
