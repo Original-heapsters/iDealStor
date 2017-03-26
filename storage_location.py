@@ -99,7 +99,7 @@ class StorageLocation:
                     lat=df['Latitude'],
                     lon=df['Longitude'],
                     mode='markers',
-                    name='humidity',
+                    name='Humidity',
                     marker=Marker(
                         size=df['Avg_Humidity']/10,
                         color='rgb(124,252,0)',
@@ -111,7 +111,7 @@ class StorageLocation:
                     lat=df['Latitude'],
                     lon=df['Longitude'],
                     mode='markers',
-                    name='avg temp',
+                    name='AVG Temp',
                     marker=Marker(
                         size=df['Avg_Temp']/10,
                         color='rgb(255,20,147)',
@@ -123,7 +123,7 @@ class StorageLocation:
                     lat=df['Latitude'],
                     lon=df['Longitude'],
                     mode='markers',
-                    name='avg max temp',
+                    name='AVG Max Temp',
                     marker=Marker(
                         size=df['Avg_Temp_Max']/10,
                         color='rgb(255,0,0)',
@@ -135,7 +135,7 @@ class StorageLocation:
                     lat=df['Latitude'],
                     lon=df['Longitude'],
                     mode='markers',
-                    name='avg min temp',
+                    name='AVG Min Temp',
                     marker=Marker(
                         size=df['Avg_Temp_Min']/10,
                         color='rgb(30,144,255)',
@@ -185,6 +185,7 @@ class StorageLocation:
                 )]
             )
             layout = dict(
+                    font=dict(family='Courier New, monospace', size=24, color='#7f7f7f'),
                     title = 'Ideal Storage Areas',
                     showlegend = True,
                     geo = dict(
@@ -209,7 +210,7 @@ class StorageLocation:
                     lat=df['Latitude'],
                     lon=df['Longitude'],
                     mode='markers',
-                    name='humidity',
+                    name='Humidity',
                     marker=Marker(
                         size=df['Avg_Humidity']/10,
                         color='rgb(124,252,0)',
@@ -221,7 +222,7 @@ class StorageLocation:
                     lat=df['Latitude'],
                     lon=df['Longitude'],
                     mode='markers',
-                    name='avg temp',
+                    name='AVG Temp',
                     marker=Marker(
                         size=df['Avg_Temp']/10,
                         color='rgb(255,20,147)',
@@ -233,7 +234,7 @@ class StorageLocation:
                     lat=df['Latitude'],
                     lon=df['Longitude'],
                     mode='markers',
-                    name='avg max temp',
+                    name='AVG Max Temp',
                     marker=Marker(
                         size=df['Avg_Temp_Max']/10,
                         color='rgb(255,0,0)',
@@ -245,7 +246,7 @@ class StorageLocation:
                     lat=df['Latitude'],
                     lon=df['Longitude'],
                     mode='markers',
-                    name='avg min temp',
+                    name='AVG Min Temp',
                     marker=Marker(
                         size=df['Avg_Temp_Min']/10,
                         color='rgb(30,144,255)',
@@ -282,6 +283,7 @@ class StorageLocation:
                 )]
             )
             layout = dict(
+                    font=dict(family='Courier New, monospace', size=24, color='#7f7f7f'),
                     title = 'Ideal Storage Areas',
                     showlegend = True,
                     geo = dict(
@@ -306,7 +308,7 @@ class StorageLocation:
                     lat=df['Latitude'],
                     lon=df['Longitude'],
                     mode='markers',
-                    name='humidity',
+                    name='Humidity',
                     marker=Marker(
                         size=df['Avg_Humidity']/10,
                         color='rgb(124,252,0)',
@@ -318,7 +320,7 @@ class StorageLocation:
                     lat=df['Latitude'],
                     lon=df['Longitude'],
                     mode='markers',
-                    name='avg temp',
+                    name='AVG Temp',
                     marker=Marker(
                         size=df['Avg_Temp']/10,
                         color='rgb(255,20,147)',
@@ -330,7 +332,7 @@ class StorageLocation:
                     lat=df['Latitude'],
                     lon=df['Longitude'],
                     mode='markers',
-                    name='avg max temp',
+                    name='AVG Max Temp',
                     marker=Marker(
                         size=df['Avg_Temp_Max']/10,
                         color='rgb(255,0,0)',
@@ -342,7 +344,7 @@ class StorageLocation:
                     lat=df['Latitude'],
                     lon=df['Longitude'],
                     mode='markers',
-                    name='avg min temp',
+                    name='AVG Min Temp',
                     marker=Marker(
                         size=df['Avg_Temp_Min']/10,
                         color='rgb(30,144,255)',
@@ -379,6 +381,7 @@ class StorageLocation:
                 )]
             )
             layout = dict(
+                    font=dict(family='Courier New, monospace', size=24, color='#7f7f7f'),
                     title = 'Ideal Storage Areas',
                     showlegend = True,
                     geo = dict(
@@ -403,7 +406,7 @@ class StorageLocation:
                     lat=df['Latitude'],
                     lon=df['Longitude'],
                     mode='markers',
-                    name='humidity',
+                    name='Humidity',
                     marker=Marker(
                         size=df['Avg_Humidity']/10,
                         color='rgb(124,252,0)',
@@ -415,7 +418,7 @@ class StorageLocation:
                     lat=df['Latitude'],
                     lon=df['Longitude'],
                     mode='markers',
-                    name='avg temp',
+                    name='AVG Temp',
                     marker=Marker(
                         size=df['Avg_Temp']/10,
                         color='rgb(255,20,147)',
@@ -427,7 +430,7 @@ class StorageLocation:
                     lat=df['Latitude'],
                     lon=df['Longitude'],
                     mode='markers',
-                    name='avg max temp',
+                    name='AVG Max Temp',
                     marker=Marker(
                         size=df['Avg_Temp_Max']/10,
                         color='rgb(255,0,0)',
@@ -439,7 +442,7 @@ class StorageLocation:
                     lat=df['Latitude'],
                     lon=df['Longitude'],
                     mode='markers',
-                    name='avg min temp',
+                    name='AVG Min Temp',
                     marker=Marker(
                         size=df['Avg_Temp_Min']/10,
                         color='rgb(30,144,255)',
@@ -476,6 +479,7 @@ class StorageLocation:
                 )]
             )
             layout = dict(
+                    font=dict(family='Courier New, monospace', size=24, color='#7f7f7f'),
                     title = 'Ideal Storage Areas',
                     showlegend = True,
                     geo = dict(
@@ -500,7 +504,7 @@ class StorageLocation:
                     lat=df['Latitude'],
                     lon=df['Longitude'],
                     mode='markers',
-                    name='humidity',
+                    name='Humidity',
                     marker=Marker(
                         size=df['Avg_Humidity']/10,
                         color='rgb(124,252,0)',
@@ -512,7 +516,7 @@ class StorageLocation:
                     lat=df['Latitude'],
                     lon=df['Longitude'],
                     mode='markers',
-                    name='avg temp',
+                    name='AVG Temp',
                     marker=Marker(
                         size=df['Avg_Temp']/10,
                         color='rgb(255,20,147)',
@@ -524,7 +528,7 @@ class StorageLocation:
                     lat=df['Latitude'],
                     lon=df['Longitude'],
                     mode='markers',
-                    name='avg max temp',
+                    name='AVG Max Temp',
                     marker=Marker(
                         size=df['Avg_Temp_Max']/10,
                         color='rgb(255,0,0)',
@@ -536,7 +540,7 @@ class StorageLocation:
                     lat=df['Latitude'],
                     lon=df['Longitude'],
                     mode='markers',
-                    name='avg min temp',
+                    name='AVG Min Temp',
                     marker=Marker(
                         size=df['Avg_Temp_Min']/10,
                         color='rgb(30,144,255)',
@@ -560,6 +564,7 @@ class StorageLocation:
                 )]
             )
             layout = dict(
+                    font=dict(family='Courier New, monospace', size=24, color='#7f7f7f'),
                     title = 'Ideal Storage Areas',
                     showlegend = True,
                     geo = dict(
@@ -584,7 +589,7 @@ class StorageLocation:
                     lat=df['Latitude'],
                     lon=df['Longitude'],
                     mode='markers',
-                    name='humidity',
+                    name='Humidity',
                     marker=Marker(
                         size=df['Avg_Humidity']/10,
                         color='rgb(124,252,0)',
@@ -596,7 +601,7 @@ class StorageLocation:
                     lat=df['Latitude'],
                     lon=df['Longitude'],
                     mode='markers',
-                    name='avg temp',
+                    name='AVG Temp',
                     marker=Marker(
                         size=df['Avg_Temp']/10,
                         color='rgb(255,20,147)',
@@ -608,7 +613,7 @@ class StorageLocation:
                     lat=df['Latitude'],
                     lon=df['Longitude'],
                     mode='markers',
-                    name='avg max temp',
+                    name='AVG Max Temp',
                     marker=Marker(
                         size=df['Avg_Temp_Max']/10,
                         color='rgb(255,0,0)',
@@ -620,7 +625,7 @@ class StorageLocation:
                     lat=df['Latitude'],
                     lon=df['Longitude'],
                     mode='markers',
-                    name='avg min temp',
+                    name='AVG Min Temp',
                     marker=Marker(
                         size=df['Avg_Temp_Min']/10,
                         color='rgb(30,144,255)',
@@ -644,6 +649,7 @@ class StorageLocation:
                 )]
             )
             layout = dict(
+                    font=dict(family='Courier New, monospace', size=24, color='#7f7f7f'),
                     title = 'Ideal Storage Areas',
                     showlegend = True,
                     geo = dict(
@@ -667,7 +673,7 @@ class StorageLocation:
                     lat=df['Latitude'],
                     lon=df['Longitude'],
                     mode='markers',
-                    name='humidity',
+                    name='Humidity',
                     marker=Marker(
                         size=df['Avg_Humidity']/10,
                         color='rgb(124,252,0)',
@@ -679,7 +685,7 @@ class StorageLocation:
                     lat=df['Latitude'],
                     lon=df['Longitude'],
                     mode='markers',
-                    name='avg temp',
+                    name='AVG Temp',
                     marker=Marker(
                         size=df['Avg_Temp']/10,
                         color='rgb(255,20,147)',
@@ -691,7 +697,7 @@ class StorageLocation:
                     lat=df['Latitude'],
                     lon=df['Longitude'],
                     mode='markers',
-                    name='avg max temp',
+                    name='AVG Max Temp',
                     marker=Marker(
                         size=df['Avg_Temp_Max']/10,
                         color='rgb(255,0,0)',
@@ -703,7 +709,7 @@ class StorageLocation:
                     lat=df['Latitude'],
                     lon=df['Longitude'],
                     mode='markers',
-                    name='avg min temp',
+                    name='AVG Min Temp',
                     marker=Marker(
                         size=df['Avg_Temp_Min']/10,
                         color='rgb(30,144,255)',
@@ -727,6 +733,7 @@ class StorageLocation:
                 )]
             )
             layout = dict(
+                    font=dict(family='Courier New, monospace', size=24, color='#7f7f7f'),
                     title = 'Ideal Storage Areas',
                     showlegend = True,
                     geo = dict(
