@@ -85,6 +85,12 @@ def food_survival():
 
 @app.route('/storage_location', methods=['GET','POST'])
 def storage_location():
+    if 'selectCrops' in session:
+        selCrops = session['selectCrops']
+        if len(selCrops) > 0:
+            for k,v in selCrops.items():
+                for key, val in selCrops[k].items():
+                    print "SELECTED" + k + " -- " + key + " -- " + val
 
     storageLocation = StorageLocation()
     storageLocation.hello()
