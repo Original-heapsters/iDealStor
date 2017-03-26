@@ -3,6 +3,7 @@ import plotly.graph_objs as go
 import pandas as pd
 import requests
 import json
+import csv
 
 class StorageLocation:
 
@@ -123,7 +124,43 @@ class StorageLocation:
         joint
         joint.query()
 
+    def getIdealScores(self, cropDict):
+        deEfs = []
+        for crops in cropDict:
+            newDict = {}
+            tempList = []
+            print crops
+            for crop in cropDict[crops]:
+                tempList.append(cropDict[crops][crop])
+                print cropDict[crops][crop]
+            newDict[crops] = tempList
 
+        deEfs.append(newDict)
+
+        with open('MOCK_DATA.csv', 'rb') as csvfile:
+            reader = csv.DictReader(csvfile)
+            for line in reader:
+                idealCount = 0
+                for crop in deEfs:
+                    for item,data in crop.items():
+                        if self.acceptable(line['Avg_Temp'], data[0], 10):
+                            idealCount += 1
+                        if self.acceptable(line['Avg_Temp_Min'], data[1], 10):
+                            idealCount += 1
+                        if self.acceptable(line['Avg_Temp_Max'], data[2], 10):
+                            idealCount += 1
+                        if self.acceptable(line['Avg_Humidity'], data[3], 10):
+                            idealCount += 1
+                        print 'IdealScore ' + str(idealCount)
+                #print(line['Latitude'], line['Longitude'], line['Avg_Humidity'], line['Avg_Temp'], line['Avg_Temp_Max'], line['Avg_Temp_Min'])
+
+
+
+    def acceptable(self, val1, val2, thresh):
+        if abs(int(val1) - int(val2)) < thresh:
+            return True
+        else:
+            return False
 
     def k2f(self,t):
         return (t*9/5.0)-459.67

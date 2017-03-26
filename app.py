@@ -97,6 +97,7 @@ def storage_location():
 
     storageLocation = StorageLocation()
     storageLocation.hello()
+    storageLocation.getIdealScores(selCrops)
     #storageLocation.map()
     if request.method == 'POST':
         lat = request.form['latitude']
