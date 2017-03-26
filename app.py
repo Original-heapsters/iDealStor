@@ -4,7 +4,7 @@ from type_of_food import TypeOfFood
 from food_survival import FoodSurvival
 from storage_location import StorageLocation
 from forecast import Forecast
-from flask import Flask, render_template, request, g, session
+from flask import Flask, render_template, request, g, session, url_for, redirect
 from flask.ext.googlemaps import GoogleMaps
 
 
@@ -57,7 +57,8 @@ def type_of_food():
         session['selectCrops'] = selectedCrops
 
 
-        return render_template('type_of_food.html', args=args, crops=crops)
+        return redirect(url_for('storage_location'))
+        #render_template('type_of_food.html', args=args, crops=crops)
     else:
         if 'selectCrops' in session:
             selCrops = session['selectCrops']
@@ -87,9 +88,11 @@ def food_survival():
 def storage_location():
     if 'selectCrops' in session:
         selCrops = session['selectCrops']
+        cropData = []
         if len(selCrops) > 0:
             for k,v in selCrops.items():
                 for key, val in selCrops[k].items():
+                    cropData.append(k + " -- " + key + " -- " + val)
                     print "SELECTED" + k + " -- " + key + " -- " + val
 
     storageLocation = StorageLocation()
@@ -110,9 +113,10 @@ def storage_location():
         temp=temp,
         humidity=humidity,
         lat=lat,
-        long=long)
+        long=long,
+        cropData=cropData)
     else:
-        return render_template('storage_location.html')
+        return render_template('storage_location.html',cropData=cropData)
 
 @app.route('/forecast', methods=['GET','POST'])
 def forecast():
