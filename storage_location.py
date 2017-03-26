@@ -126,16 +126,18 @@ class StorageLocation:
 
     def getIdealScores(self, cropDict):
         deEfs = []
+        endDict = {}
         for crops in cropDict:
             newDict = {}
             tempList = []
             print crops
+            endDict[str(crops)] = []
             for crop in cropDict[crops]:
+
                 tempList.append(cropDict[crops][crop])
                 print cropDict[crops][crop]
             newDict[crops] = tempList
-
-        deEfs.append(newDict)
+            deEfs.append(newDict)
 
         with open('MOCK_DATA.csv', 'rb') as csvfile:
             reader = csv.DictReader(csvfile)
@@ -151,7 +153,11 @@ class StorageLocation:
                             idealCount += 1
                         if self.acceptable(line['Avg_Humidity'], data[3], 10):
                             idealCount += 1
-                        print 'IdealScore ' + str(idealCount)
+                        endDict[item].append(str(idealCount))
+
+            for key,value in endDict.items():
+                for score in endDict[key]:
+                    print key + ' Score: ' + score
                 #print(line['giLatitude'], line['Longitude'], line['Avg_Humidity'], line['Avg_Temp'], line['Avg_Temp_Max'], line['Avg_Temp_Min'])
 
 
