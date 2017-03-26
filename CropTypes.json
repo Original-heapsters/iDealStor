@@ -7,8 +7,8 @@
             "temperatures": {
                 "ideal": "70",
                 "min": "65",
-                "max": "80",
-                "hum": "80"
+                "max": "73",
+                "hum": "20"
             }
         },
         "rice": {
@@ -17,8 +17,8 @@
           "img" : "Rice.jpg",
           "temperatures": {
               "ideal": "75",
-              "min": "55",
-              "max": "90",
+              "min": "70",
+              "max": "80",
               "hum": "75"
           }
         },
@@ -27,10 +27,10 @@
           "name": "Corn",
           "img" : "Corn.jpg",
           "temperatures": {
-              "ideal": "80",
-              "min": "50",
-              "max": "85",
-              "hum": "80"
+              "ideal": "50",
+              "min": "45",
+              "max": "55",
+              "hum": "50"
           }
         }
     }]

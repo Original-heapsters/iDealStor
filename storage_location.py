@@ -67,11 +67,11 @@ class StorageLocation:
         avgHumidity = self.k2f(avgHumidity)
 
     def map(self):
-        df = pd.read_csv('MOCK_DATA.csv')
+        df = pd.read_csv('out.csv')
         df.head()
         limits = [(0,19),(20,60),(61,90),(91,150),(151,200)]
         colors = ["rgb(0,116,217)","rgb(255,65,54)","rgb(133,20,75)","rgb(255,133,27)","lightgrey"]
-        Ideal_Colors = ["rgb(250,250,210)","rgb(255,165,0)","rgb(152,251,152)","rgb(124,252,0)","lightgrey"]
+        Ideal_Colors = ["rgb(133,20,75)","rgb(0,116,217)","rgb(255,0,255)","rgb(124,252,0)"]
         cities = []
         scale = 5000
 
@@ -93,89 +93,681 @@ class StorageLocation:
                 name = '{0} - {1}'.format(lim[0],lim[1]) )
             cities.append(city)
 
-        data = go.Data([
-    Scattermapbox(
-        lat=df['Latitude'],
-        lon=df['Longitude'],
-        mode='markers',
-        name='humidity',
-        marker=Marker(
-            size=df['Avg_Humidity']/10,
-            color='rgb(255, 0, 0)',
-            opacity=0.7
-        ),
-        text='locations_name',
-        hoverinfo='text'
-    ),Scattermapbox(
-        lat=df['Latitude'],
-        lon=df['Longitude'],
-        mode='markers',
-        name='avg temp',
-        marker=Marker(
-            size=df['Avg_Temp']/10,
-            color='rgb(255, 255, 0)',
-            opacity=0.7
-        ),
-        text='locations_name',
-        hoverinfo='text'
-    ),Scattermapbox(
-        lat=df['Latitude'],
-        lon=df['Longitude'],
-        mode='markers',
-        name='avg max temp',
-        marker=Marker(
-            size=df['Avg_Temp_Max']/10,
-            color='rgb(255, 0, 255)',
-            opacity=0.7
-        ),
-        text='locations_name',
-        hoverinfo='text'
-    ),Scattermapbox(
-        lat=df['Latitude'],
-        lon=df['Longitude'],
-        mode='markers',
-        name='avg min temp',
-        marker=Marker(
-            size=df['Avg_Temp_Min']/10,
-            color='rgb(134, 234, 234)',
-            opacity=0.7
-        ),
-        text='locations_name',
-        hoverinfo='text'
-    ),
-    Scattermapbox(
-        lat=df['Latitude'],
-        lon=df['Longitude'],
-        mode='markers',
-        name='avg max temp',
-        marker=Marker(
-            size=8,
-            color='rgb(142, 117, 112)',
-            opacity=0.7
-        ),
-        hoverinfo='skip'
-    )]
-)
-
-        layout = dict(
-                title = 'Avg Temp Test',
-                showlegend = True,
-                geo = dict(
-                    scope='world',
-                    showcontries= True,
-                    projection=dict( type='Robinson' ),
-                    showland = True,
-                    mapscale = 1,
-                    landcolor = 'rgb(217, 217, 217)',
-                    subunitwidth=2,
-                    countrywidth=2,
-                    subunitcolor="rgb(255, 255, 255)",
-                    countrycolor="rgb(255, 255, 255)"
+        if 'wheat' in df.columns and 'rice' in df.columns and 'corn' in df.columns:
+            data = go.Data([
+                Scattermapbox(
+                    lat=df['Latitude'],
+                    lon=df['Longitude'],
+                    mode='markers',
+                    name='humidity',
+                    marker=Marker(
+                        size=df['Avg_Humidity']/10,
+                        color='rgb(255, 0, 0)',
+                        opacity=0.7
+                    ),
+                    text=df['Avg_Humidity'],
+                    hoverinfo='text'
+                ),Scattermapbox(
+                    lat=df['Latitude'],
+                    lon=df['Longitude'],
+                    mode='markers',
+                    name='avg temp',
+                    marker=Marker(
+                        size=df['Avg_Temp']/10,
+                        color='rgb(255, 255, 0)',
+                        opacity=0.7
+                    ),
+                    text=df['Avg_Temp'],
+                    hoverinfo='text'
+                ),Scattermapbox(
+                    lat=df['Latitude'],
+                    lon=df['Longitude'],
+                    mode='markers',
+                    name='avg max temp',
+                    marker=Marker(
+                        size=df['Avg_Temp_Max']/10,
+                        color='rgb(255, 0, 255)',
+                        opacity=0.7
+                    ),
+                    text=df['Avg_Temp_Max'],
+                    hoverinfo='text'
+                ),Scattermapbox(
+                    lat=df['Latitude'],
+                    lon=df['Longitude'],
+                    mode='markers',
+                    name='avg min temp',
+                    marker=Marker(
+                        size=df['Avg_Temp_Min']/10,
+                        color='rgb(134, 234, 234)',
+                        opacity=0.7
+                    ),
+                    text=df['Avg_Temp_Min'],
+                    hoverinfo='text'
                 ),
+                Scattermapbox(
+                    lat=df['Latitude'],
+                    lon=df['Longitude'],
+                    mode='markers',
+                    name='Wheat Ideal Score',
+                    marker=Marker(
+                        size=df['wheat'] * 5,
+                        color=Ideal_Colors[0],
+                        opacity=0.7
+                    ),
+                    text=df['wheat'],
+                    hoverinfo='text'
+                ),
+                Scattermapbox(
+                    lat=df['Latitude'],
+                    lon=df['Longitude'],
+                    mode='markers',
+                    name='Rice Ideal Score',
+                    marker=Marker(
+                        size=df['rice'] * 5,
+                        color=Ideal_Colors[0],
+                        opacity=0.7
+                    ),
+                    text=df['rice'],
+                    hoverinfo='text'
+                ),
+                Scattermapbox(
+                    lat=df['Latitude'],
+                    lon=df['Longitude'],
+                    mode='markers',
+                    name='Corn Ideal Score',
+                    marker=Marker(
+                        size=df['corn'] * 5,
+                        color=Ideal_Colors[0],
+                        opacity=0.7
+                    ),
+                    text=df['corn'],
+                    hoverinfo='text'
+                )]
             )
-        fig = dict( data=data, layout=layout )
-        py.plot( fig, validate=False, filename='Avg_Temp', auto_open=False )
+            layout = dict(
+                    title = 'Ideal Storage Areas',
+                    showlegend = True,
+                    geo = dict(
+                        scope='world',
+                        showcontries= True,
+                        projection=dict( type='Robinson' ),
+                        showland = True,
+                        mapscale = 1,
+                        landcolor = 'rgb(217, 217, 217)',
+                        subunitwidth=2,
+                        countrywidth=2,
+                        subunitcolor="rgb(255, 255, 255)",
+                        countrycolor="rgb(255, 255, 255)"
+                    ),
+                )
+            fig = dict( data=data, layout=layout )
+            py.plot( fig, validate=False, filename='Avg_Temp', auto_open=False )
+
+        elif 'wheat' in df.columns and 'rice' in df.columns:
+            data = go.Data([
+                Scattermapbox(
+                    lat=df['Latitude'],
+                    lon=df['Longitude'],
+                    mode='markers',
+                    name='humidity',
+                    marker=Marker(
+                        size=df['Avg_Humidity']/10,
+                        color='rgb(255, 0, 0)',
+                        opacity=0.7
+                    ),
+                    text=df['Avg_Humidity'],
+                    hoverinfo='text'
+                ),Scattermapbox(
+                    lat=df['Latitude'],
+                    lon=df['Longitude'],
+                    mode='markers',
+                    name='avg temp',
+                    marker=Marker(
+                        size=df['Avg_Temp']/10,
+                        color='rgb(255, 255, 0)',
+                        opacity=0.7
+                    ),
+                    text=df['Avg_Temp'],
+                    hoverinfo='text'
+                ),Scattermapbox(
+                    lat=df['Latitude'],
+                    lon=df['Longitude'],
+                    mode='markers',
+                    name='avg max temp',
+                    marker=Marker(
+                        size=df['Avg_Temp_Max']/10,
+                        color='rgb(255, 0, 255)',
+                        opacity=0.7
+                    ),
+                    text=df['Avg_Temp_Max'],
+                    hoverinfo='text'
+                ),Scattermapbox(
+                    lat=df['Latitude'],
+                    lon=df['Longitude'],
+                    mode='markers',
+                    name='avg min temp',
+                    marker=Marker(
+                        size=df['Avg_Temp_Min']/10,
+                        color='rgb(134, 234, 234)',
+                        opacity=0.7
+                    ),
+                    text=df['Avg_Temp_Min'],
+                    hoverinfo='text'
+                ),
+                Scattermapbox(
+                    lat=df['Latitude'],
+                    lon=df['Longitude'],
+                    mode='markers',
+                    name='Wheat Ideal Score',
+                    marker=Marker(
+                        size=df['wheat'] * 5,
+                        color=Ideal_Colors[0],
+                        opacity=0.7
+                    ),
+                    text=df['wheat'],
+                    hoverinfo='text'
+                ),
+                Scattermapbox(
+                    lat=df['Latitude'],
+                    lon=df['Longitude'],
+                    mode='markers',
+                    name='Rice Ideal Score',
+                    marker=Marker(
+                        size=df['rice'] * 5,
+                        color=Ideal_Colors[0],
+                        opacity=0.7
+                    ),
+                    text=df['rice'],
+                    hoverinfo='text'
+                )]
+            )
+            layout = dict(
+                    title = 'Ideal Storage Areas',
+                    showlegend = True,
+                    geo = dict(
+                        scope='world',
+                        showcontries= True,
+                        projection=dict( type='Robinson' ),
+                        showland = True,
+                        mapscale = 1,
+                        landcolor = 'rgb(217, 217, 217)',
+                        subunitwidth=2,
+                        countrywidth=2,
+                        subunitcolor="rgb(255, 255, 255)",
+                        countrycolor="rgb(255, 255, 255)"
+                    ),
+                )
+            fig = dict( data=data, layout=layout )
+            py.plot( fig, validate=False, filename='Avg_Temp', auto_open=False )
+
+        elif 'wheat' in df.columns and 'corn' in df.columns:
+            data = go.Data([
+                Scattermapbox(
+                    lat=df['Latitude'],
+                    lon=df['Longitude'],
+                    mode='markers',
+                    name='humidity',
+                    marker=Marker(
+                        size=df['Avg_Humidity']/10,
+                        color='rgb(255, 0, 0)',
+                        opacity=0.7
+                    ),
+                    text=df['Avg_Humidity'],
+                    hoverinfo='text'
+                ),Scattermapbox(
+                    lat=df['Latitude'],
+                    lon=df['Longitude'],
+                    mode='markers',
+                    name='avg temp',
+                    marker=Marker(
+                        size=df['Avg_Temp']/10,
+                        color='rgb(255, 255, 0)',
+                        opacity=0.7
+                    ),
+                    text=df['Avg_Temp'],
+                    hoverinfo='text'
+                ),Scattermapbox(
+                    lat=df['Latitude'],
+                    lon=df['Longitude'],
+                    mode='markers',
+                    name='avg max temp',
+                    marker=Marker(
+                        size=df['Avg_Temp_Max']/10,
+                        color='rgb(255, 0, 255)',
+                        opacity=0.7
+                    ),
+                    text=df['Avg_Temp_Max'],
+                    hoverinfo='text'
+                ),Scattermapbox(
+                    lat=df['Latitude'],
+                    lon=df['Longitude'],
+                    mode='markers',
+                    name='avg min temp',
+                    marker=Marker(
+                        size=df['Avg_Temp_Min']/10,
+                        color='rgb(134, 234, 234)',
+                        opacity=0.7
+                    ),
+                    text=df['Avg_Temp_Min'],
+                    hoverinfo='text'
+                ),
+                Scattermapbox(
+                    lat=df['Latitude'],
+                    lon=df['Longitude'],
+                    mode='markers',
+                    name='Wheat Ideal Score',
+                    marker=Marker(
+                        size=df['wheat'] * 5,
+                        color=Ideal_Colors[0],
+                        opacity=0.7
+                    ),
+                    text=df['wheat'],
+                    hoverinfo='text'
+                ),
+                Scattermapbox(
+                    lat=df['Latitude'],
+                    lon=df['Longitude'],
+                    mode='markers',
+                    name='Corn Ideal Score',
+                    marker=Marker(
+                        size=df['corn'] * 5,
+                        color=Ideal_Colors[0],
+                        opacity=0.7
+                    ),
+                    text=df['corn'],
+                    hoverinfo='text'
+                )]
+            )
+            layout = dict(
+                    title = 'Ideal Storage Areas',
+                    showlegend = True,
+                    geo = dict(
+                        scope='world',
+                        showcontries= True,
+                        projection=dict( type='Robinson' ),
+                        showland = True,
+                        mapscale = 1,
+                        landcolor = 'rgb(217, 217, 217)',
+                        subunitwidth=2,
+                        countrywidth=2,
+                        subunitcolor="rgb(255, 255, 255)",
+                        countrycolor="rgb(255, 255, 255)"
+                    ),
+                )
+            fig = dict( data=data, layout=layout )
+            py.plot( fig, validate=False, filename='Avg_Temp', auto_open=False )
+
+        elif 'corn' in df.columns and 'rice' in df.columns:
+            data = go.Data([
+                Scattermapbox(
+                    lat=df['Latitude'],
+                    lon=df['Longitude'],
+                    mode='markers',
+                    name='humidity',
+                    marker=Marker(
+                        size=df['Avg_Humidity']/10,
+                        color='rgb(255, 0, 0)',
+                        opacity=0.7
+                    ),
+                    text=df['Avg_Humidity'],
+                    hoverinfo='text'
+                ),Scattermapbox(
+                    lat=df['Latitude'],
+                    lon=df['Longitude'],
+                    mode='markers',
+                    name='avg temp',
+                    marker=Marker(
+                        size=df['Avg_Temp']/10,
+                        color='rgb(255, 255, 0)',
+                        opacity=0.7
+                    ),
+                    text=df['Avg_Temp'],
+                    hoverinfo='text'
+                ),Scattermapbox(
+                    lat=df['Latitude'],
+                    lon=df['Longitude'],
+                    mode='markers',
+                    name='avg max temp',
+                    marker=Marker(
+                        size=df['Avg_Temp_Max']/10,
+                        color='rgb(255, 0, 255)',
+                        opacity=0.7
+                    ),
+                    text=df['Avg_Temp_Max'],
+                    hoverinfo='text'
+                ),Scattermapbox(
+                    lat=df['Latitude'],
+                    lon=df['Longitude'],
+                    mode='markers',
+                    name='avg min temp',
+                    marker=Marker(
+                        size=df['Avg_Temp_Min']/10,
+                        color='rgb(134, 234, 234)',
+                        opacity=0.7
+                    ),
+                    text=df['Avg_Temp_Min'],
+                    hoverinfo='text'
+                ),
+                Scattermapbox(
+                    lat=df['Latitude'],
+                    lon=df['Longitude'],
+                    mode='markers',
+                    name='Corn Ideal Score',
+                    marker=Marker(
+                        size=df['corn'] * 5,
+                        color=Ideal_Colors[0],
+                        opacity=0.7
+                    ),
+                    text=df['corn'],
+                    hoverinfo='text'
+                ),
+                Scattermapbox(
+                    lat=df['Latitude'],
+                    lon=df['Longitude'],
+                    mode='markers',
+                    name='Rice Ideal Score',
+                    marker=Marker(
+                        size=df['rice'] * 5,
+                        color=Ideal_Colors[0],
+                        opacity=0.7
+                    ),
+                    text=df['rice'],
+                    hoverinfo='text'
+                )]
+            )
+            layout = dict(
+                    title = 'Ideal Storage Areas',
+                    showlegend = True,
+                    geo = dict(
+                        scope='world',
+                        showcontries= True,
+                        projection=dict( type='Robinson' ),
+                        showland = True,
+                        mapscale = 1,
+                        landcolor = 'rgb(217, 217, 217)',
+                        subunitwidth=2,
+                        countrywidth=2,
+                        subunitcolor="rgb(255, 255, 255)",
+                        countrycolor="rgb(255, 255, 255)"
+                    ),
+                )
+            fig = dict( data=data, layout=layout )
+            py.plot( fig, validate=False, filename='Avg_Temp', auto_open=False )
+
+        elif 'corn' in df.columns:
+            data = go.Data([
+                Scattermapbox(
+                    lat=df['Latitude'],
+                    lon=df['Longitude'],
+                    mode='markers',
+                    name='humidity',
+                    marker=Marker(
+                        size=df['Avg_Humidity']/10,
+                        color='rgb(255, 0, 0)',
+                        opacity=0.7
+                    ),
+                    text=df['Avg_Humidity'],
+                    hoverinfo='text'
+                ),Scattermapbox(
+                    lat=df['Latitude'],
+                    lon=df['Longitude'],
+                    mode='markers',
+                    name='avg temp',
+                    marker=Marker(
+                        size=df['Avg_Temp']/10,
+                        color='rgb(255, 255, 0)',
+                        opacity=0.7
+                    ),
+                    text=df['Avg_Temp'],
+                    hoverinfo='text'
+                ),Scattermapbox(
+                    lat=df['Latitude'],
+                    lon=df['Longitude'],
+                    mode='markers',
+                    name='avg max temp',
+                    marker=Marker(
+                        size=df['Avg_Temp_Max']/10,
+                        color='rgb(255, 0, 255)',
+                        opacity=0.7
+                    ),
+                    text=df['Avg_Temp_Max'],
+                    hoverinfo='text'
+                ),Scattermapbox(
+                    lat=df['Latitude'],
+                    lon=df['Longitude'],
+                    mode='markers',
+                    name='avg min temp',
+                    marker=Marker(
+                        size=df['Avg_Temp_Min']/10,
+                        color='rgb(134, 234, 234)',
+                        opacity=0.7
+                    ),
+                    text=df['Avg_Temp_Min'],
+                    hoverinfo='text'
+                ),
+                Scattermapbox(
+                    lat=df['Latitude'],
+                    lon=df['Longitude'],
+                    mode='markers',
+                    name='Corn Ideal Score',
+                    marker=Marker(
+                        size=df['corn'] * 5,
+                        color=Ideal_Colors[0],
+                        opacity=0.7
+                    ),
+                    text=df['corn'],
+                    hoverinfo='text'
+                )]
+            )
+            layout = dict(
+                    title = 'Ideal Storage Areas',
+                    showlegend = True,
+                    geo = dict(
+                        scope='world',
+                        showcontries= True,
+                        projection=dict( type='Robinson' ),
+                        showland = True,
+                        mapscale = 1,
+                        landcolor = 'rgb(217, 217, 217)',
+                        subunitwidth=2,
+                        countrywidth=2,
+                        subunitcolor="rgb(255, 255, 255)",
+                        countrycolor="rgb(255, 255, 255)"
+                    ),
+                )
+            fig = dict( data=data, layout=layout )
+            py.plot( fig, validate=False, filename='Avg_Temp', auto_open=False )
+
+        elif 'rice' in df.columns:
+            data = go.Data([
+                Scattermapbox(
+                    lat=df['Latitude'],
+                    lon=df['Longitude'],
+                    mode='markers',
+                    name='humidity',
+                    marker=Marker(
+                        size=df['Avg_Humidity']/10,
+                        color='rgb(255, 0, 0)',
+                        opacity=0.7
+                    ),
+                    text=df['Avg_Humidity'],
+                    hoverinfo='text'
+                ),Scattermapbox(
+                    lat=df['Latitude'],
+                    lon=df['Longitude'],
+                    mode='markers',
+                    name='avg temp',
+                    marker=Marker(
+                        size=df['Avg_Temp']/10,
+                        color='rgb(255, 255, 0)',
+                        opacity=0.7
+                    ),
+                    text=df['Avg_Temp'],
+                    hoverinfo='text'
+                ),Scattermapbox(
+                    lat=df['Latitude'],
+                    lon=df['Longitude'],
+                    mode='markers',
+                    name='avg max temp',
+                    marker=Marker(
+                        size=df['Avg_Temp_Max']/10,
+                        color='rgb(255, 0, 255)',
+                        opacity=0.7
+                    ),
+                    text=df['Avg_Temp_Max'],
+                    hoverinfo='text'
+                ),Scattermapbox(
+                    lat=df['Latitude'],
+                    lon=df['Longitude'],
+                    mode='markers',
+                    name='avg min temp',
+                    marker=Marker(
+                        size=df['Avg_Temp_Min']/10,
+                        color='rgb(134, 234, 234)',
+                        opacity=0.7
+                    ),
+                    text=df['Avg_Temp_Min'],
+                    hoverinfo='text'
+                ),
+                Scattermapbox(
+                    lat=df['Latitude'],
+                    lon=df['Longitude'],
+                    mode='markers',
+                    name='Rice Ideal Score',
+                    marker=Marker(
+                        size=df['rice'] * 5,
+                        color=Ideal_Colors[0],
+                        opacity=0.7
+                    ),
+                    text=df['rice'],
+                    hoverinfo='text'
+                )]
+            )
+            layout = dict(
+                    title = 'Ideal Storage Areas',
+                    showlegend = True,
+                    geo = dict(
+                        scope='world',
+                        showcontries= True,
+                        projection=dict( type='Robinson' ),
+                        showland = True,
+                        mapscale = 1,
+                        landcolor = 'rgb(217, 217, 217)',
+                        subunitwidth=2,
+                        countrywidth=2,
+                        subunitcolor="rgb(255, 255, 255)",
+                        countrycolor="rgb(255, 255, 255)"
+                    ),
+                )
+            fig = dict( data=data, layout=layout )
+
+        elif 'wheat' in df.columns:
+            data = go.Data([
+                Scattermapbox(
+                    lat=df['Latitude'],
+                    lon=df['Longitude'],
+                    mode='markers',
+                    name='humidity',
+                    marker=Marker(
+                        size=df['Avg_Humidity']/10,
+                        color='rgb(255, 0, 0)',
+                        opacity=0.7
+                    ),
+                    text=df['Avg_Humidity'],
+                    hoverinfo='text'
+                ),Scattermapbox(
+                    lat=df['Latitude'],
+                    lon=df['Longitude'],
+                    mode='markers',
+                    name='avg temp',
+                    marker=Marker(
+                        size=df['Avg_Temp']/10,
+                        color='rgb(255, 255, 0)',
+                        opacity=0.7
+                    ),
+                    text=df['Avg_Temp'],
+                    hoverinfo='text'
+                ),Scattermapbox(
+                    lat=df['Latitude'],
+                    lon=df['Longitude'],
+                    mode='markers',
+                    name='avg max temp',
+                    marker=Marker(
+                        size=df['Avg_Temp_Max']/10,
+                        color='rgb(255, 0, 255)',
+                        opacity=0.7
+                    ),
+                    text=df['Avg_Temp_Max'],
+                    hoverinfo='text'
+                ),Scattermapbox(
+                    lat=df['Latitude'],
+                    lon=df['Longitude'],
+                    mode='markers',
+                    name='avg min temp',
+                    marker=Marker(
+                        size=df['Avg_Temp_Min']/10,
+                        color='rgb(134, 234, 234)',
+                        opacity=0.7
+                    ),
+                    text=df['Avg_Temp_Min'],
+                    hoverinfo='text'
+                ),
+                Scattermapbox(
+                    lat=df['Latitude'],
+                    lon=df['Longitude'],
+                    mode='markers',
+                    name='Wheat Ideal Score',
+                    marker=Marker(
+                        size=df['wheat'] * 5,
+                        color=Ideal_Colors[0],
+                        opacity=0.7
+                    ),
+                    text=df['wheat'],
+                    hoverinfo='text'
+                )]
+            )
+            layout = dict(
+                    title = 'Ideal Storage Areas',
+                    showlegend = True,
+                    geo = dict(
+                        scope='world',
+                        showcontries= True,
+                        projection=dict( type='Robinson' ),
+                        showland = True,
+                        mapscale = 1,
+                        landcolor = 'rgb(217, 217, 217)',
+                        subunitwidth=2,
+                        countrywidth=2,
+                        subunitcolor="rgb(255, 255, 255)",
+                        countrycolor="rgb(255, 255, 255)"
+                    ),
+                )
+            fig = dict( data=data, layout=layout )
+            py.plot( fig, validate=False, filename='Avg_Temp', auto_open=False )
+
+
+
+
+        # layout = dict(
+        #         title = 'Ideal Storage Areas',
+        #         showlegend = True,
+        #         geo = dict(
+        #             scope='world',
+        #             showcontries= True,
+        #             projection=dict( type='Robinson' ),
+        #             showland = True,
+        #             mapscale = 1,
+        #             landcolor = 'rgb(217, 217, 217)',
+        #             subunitwidth=2,
+        #             countrywidth=2,
+        #             subunitcolor="rgb(255, 255, 255)",
+        #             countrycolor="rgb(255, 255, 255)"
+        #         ),
+        #     )
+        # fig = dict( data=data, layout=layout )
+        # py.plot( fig, validate=False, filename='Avg_Temp', auto_open=False )
         #return (avgMax, avgMin, avgTemp, avgHumidity)
+        #py.plot( fig, validate=False, filename='Avg_Temp', auto_open=False )
 
 
     def getIdealScores(self, cropDict):
@@ -199,19 +791,18 @@ class StorageLocation:
                 idealCount = 0
                 for crop in deEfs:
                     for item,data in crop.items():
-                        if self.acceptable(line['Avg_Temp'], data[0], 25):
+                        if self.acceptable(line['Avg_Temp'], data[0], 10):
                             idealCount += 1
-                        if self.acceptable(line['Avg_Temp_Min'], data[1], 25):
+                        if self.acceptable(line['Avg_Temp_Min'], data[1], 10):
                             idealCount += 1
-                        if self.acceptable(line['Avg_Temp_Max'], data[2], 25):
+                        if self.acceptable(line['Avg_Temp_Max'], data[2], 10):
                             idealCount += 1
-                        if self.acceptable(line['Avg_Humidity'], data[3], 25):
+                        if self.acceptable(line['Avg_Humidity'], data[3], 10):
                             idealCount += 1
                         endDict[item].append(str(idealCount))
-
+            headerList = ['index']
             for key,value in endDict.items():
-                for score in endDict[key]:
-                    print key + ' Score: ' + score
+                headerList.append(key)
                 #print(line['giLatitude'], line['Longitude'], line['Avg_Humidity'], line['Avg_Temp'], line['Avg_Temp_Max'], line['Avg_Temp_Min'])
                 #creates DataFrame from the endDict
             dicti = pd.DataFrame(endDict)
@@ -226,7 +817,7 @@ class StorageLocation:
 
                 next(r, None)  # skip the first row from the reader, the old header
                 # write new header
-                w.writerow(['index', 'corn', 'rice'])
+                w.writerow(headerList)
                 # copy the rest
                 for row in r:
                     w.writerow(row)
