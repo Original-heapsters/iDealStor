@@ -7,7 +7,7 @@ body
 	margin: 0;
 	padding: 0;
 	color: #333;
-	background-color: #eee;
+	background-image: url("Blue-Blur-Background.jpg");
 	font: 1em/1.2 "Helvetica Neue", Helvetica, Arial, Geneva, sans-serif;
 }
 
@@ -87,7 +87,7 @@ Layout styles
 .header
 {
 	color: #fff;
-	background: #999;
+	background-image: url("Blue-Blur-Background.jpg");
 	padding: 1em 1.25em;
 }
 
@@ -95,15 +95,16 @@ Layout styles
 
 .nav-bar
 {
-	background: #000;
+	background: #D68D2A;
 	padding: 0;
+	box-shadow: 0px -2px 2px rgba(34,34,34,0.6);
 }
 
 .content
 {
 	overflow: hidden;
 	padding: 1em 1.25em;
-	background-color: #fff;
+	background-image: url("Blue-Blur-Background.jpg");
 }
 
 .main, .aside
@@ -114,8 +115,9 @@ Layout styles
 .footer
 {
 	color: #fff;
-	background: #000;
+	background: #D68D2A;
 	padding: 1em 1.25em;
+	box-shadow: 0px -2px 2px rgba(34,34,34,0.6);
 }
 
 /* -----------------------
@@ -258,6 +260,7 @@ Wide styles
 		float: left;
 		width: 30%;
 		margin-bottom: 1em;
+		background:rgba(255,255,255,0.5);
 	}
 
 	.footer { padding: 2em 3em; }

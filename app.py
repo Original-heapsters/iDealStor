@@ -4,7 +4,7 @@ from type_of_food import TypeOfFood
 from food_survival import FoodSurvival
 from storage_location import StorageLocation
 from forecast import Forecast
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, g, session, url_for, redirect
 from flask.ext.googlemaps import GoogleMaps
 
 
@@ -13,6 +13,7 @@ GoogleMaps(app, key="AIzaSyDnDdKk8h8ipdZFyLMBeCUSbdPcShUNQjI")
 UPLOAD_FOLDER = './static/uploads/'
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif', 'csv'])
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.secret_key = 'some key for session'
 
 @app.route('/', methods=['GET','POST'])
 def index():
@@ -30,16 +31,41 @@ def type_of_food():
     typeOfFood = TypeOfFood()
     typeOfFood.hello()
     crops = {}
-
+    crops = typeOfFood.getCropJSON(os.path.abspath('./CropTypes.json'))
 
     if request.method == 'POST':
-        if request.files is not None:
-            crops = json.loads(typeOfFood.getCropCSV())
         args = []
-        args.append(request.form['TYPEOFFOOD'])
-        return render_template('type_of_food.html', args=args, crops=crops)
+        for item in request.form.getlist('crops'):
+            args.append(item)
+        selectedCrops = {}
+
+        for key,value in crops.items():
+            for v in value:
+                for crop,cropData in v.items():
+                    if cropData["name"] in args:
+                        selectedCrops[crop] = {}
+                        print crop
+                        for tempStat in cropData["temperatures"]:
+                            selectedCrops[crop][tempStat] = cropData["temperatures"][tempStat]
+                        #print tempStat
+                        #print cropData["temperatures"][tempStat]
+
+        for k,v in selectedCrops.items():
+            for key, val in selectedCrops[k].items():
+                print k + " -- " + key + " -- " + val
+
+        session['selectCrops'] = selectedCrops
+
+
+        return redirect(url_for('storage_location'))
+        #render_template('type_of_food.html', args=args, crops=crops)
     else:
-        crops = typeOfFood.getCropJSON(os.path.abspath('./CropTypes.json'))
+        if 'selectCrops' in session:
+            selCrops = session['selectCrops']
+            if len(selCrops) > 0:
+                for k,v in selCrops.items():
+                    for key, val in selCrops[k].items():
+                        print "SELECTED" + k + " -- " + key + " -- " + val
         return render_template('type_of_food.html', crops=crops)
 
 
@@ -60,6 +86,14 @@ def food_survival():
 
 @app.route('/storage_location', methods=['GET','POST'])
 def storage_location():
+    if 'selectCrops' in session:
+        selCrops = session['selectCrops']
+        cropData = []
+        if len(selCrops) > 0:
+            for k,v in selCrops.items():
+                for key, val in selCrops[k].items():
+                    cropData.append(k + " -- " + key + " -- " + val)
+                    print "SELECTED" + k + " -- " + key + " -- " + val
 
     storageLocation = StorageLocation()
     storageLocation.hello()
@@ -79,9 +113,10 @@ def storage_location():
         temp=temp,
         humidity=humidity,
         lat=lat,
-        long=long)
+        long=long,
+        cropData=cropData)
     else:
-        return render_template('storage_location.html')
+        return render_template('storage_location.html',cropData=cropData)
 
 @app.route('/forecast', methods=['GET','POST'])
 def forecast():

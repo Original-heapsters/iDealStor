@@ -1,32 +1,37 @@
 <!doctype html>
 <html>
+
 <head>
     <title>iDealStor</title>
-    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/custom.css') }}">
+    <link href="http://fonts.googleapis.com/css?family=Corben:bold" rel="stylesheet" type="text/css">
+ <link href="http://fonts.googleapis.com/css?family=Nobile" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
 
 <body>
     <div class=header>
         <div class=container>
-            <h1 class=header-heading><a href="{{ url_for('index') }}">iDealStor</a></h1>
+            <h1 class=header-heading><img href="{{ url_for('index') }}" src="{{ url_for('static', filename='icon.png')}}"></h1>
         </div>
     </div>
-    <div class=nav-bar>
-        <div class=container>
-            <ul class=nav>
-                <li><a href="{{ url_for('type_of_food') }}">Type of food</a></li>
-                <li><a href="{{ url_for('food_survival') }}">Food Survival</a></li>
-                <li><a href="{{ url_for('storage_location') }}">Storage Location</a></li>
-                <li><a href="{{ url_for('forecast') }}">Forecast</a></li>
-            </ul>
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li><a href="{{ url_for('type_of_food') }}">Type of Food</a></li>
+                    <li><a href="{{ url_for('food_survival') }}">Food Survival</a></li>
+                    <li><a href="{{ url_for('storage_location') }}">Storage Location</a></li>
+                    <li><a href="{{ url_for('forecast') }}">Forecast</a></li>
+                </ul>
+            </div>
         </div>
-    </div>
+    </nav>
     <div class=content>
         <div class=container>
-            <center>
-                {% block body %}{% endblock %}
-            </center>
+            {% block body %}{% endblock %}
         </div>
     </div>
     </div>
