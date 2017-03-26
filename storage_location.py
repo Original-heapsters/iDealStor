@@ -70,6 +70,7 @@ class StorageLocation:
         df.head()
         limits = [(0,19),(20,60),(61,90),(91,150),(151,200)]
         colors = ["rgb(0,116,217)","rgb(255,65,54)","rgb(133,20,75)","rgb(255,133,27)","lightgrey"]
+        Ideal_Colors = ["rgb(250,250,210)","rgb(255,165,0)","rgb(152,251,152)","rgb(124,252,0)","lightgrey"]
         cities = []
         scale = 5000
 
