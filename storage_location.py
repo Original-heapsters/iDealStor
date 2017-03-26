@@ -3,6 +3,7 @@ import plotly.graph_objs as go
 from plotly.graph_objs import *
 import pandas as pd
 import requests
+import os
 import json
 import csv
 
@@ -176,19 +177,6 @@ class StorageLocation:
         py.plot( fig, validate=False, filename='Avg_Temp', auto_open=False )
         #return (avgMax, avgMin, avgTemp, avgHumidity)
 
-    def getIdealScore(self, crop, stats):
-        csvdf = pd.read_csv('MOCK_DATA.csv')
-        cropdf = pd.DataFrame(crop)
-        joint = csvdf.join(cropdf)
-        for a in range(999):
-            joint.loc[a].id= crop['id']
-            joint.loc[a].ideal= crop['ideal']
-            joint.loc[a].img= crop['img']
-            joint.loc[a].max= crop['max']
-            joint.loc[a].min=  crop['min']
-            joint.loc[a].name= crop['name']
-        joint
-        joint.query()
 
     def getIdealScores(self, cropDict):
         deEfs = []
@@ -211,13 +199,13 @@ class StorageLocation:
                 idealCount = 0
                 for crop in deEfs:
                     for item,data in crop.items():
-                        if self.acceptable(line['Avg_Temp'], data[0], 10):
+                        if self.acceptable(line['Avg_Temp'], data[0], 25):
                             idealCount += 1
-                        if self.acceptable(line['Avg_Temp_Min'], data[1], 10):
+                        if self.acceptable(line['Avg_Temp_Min'], data[1], 25):
                             idealCount += 1
-                        if self.acceptable(line['Avg_Temp_Max'], data[2], 10):
+                        if self.acceptable(line['Avg_Temp_Max'], data[2], 25):
                             idealCount += 1
-                        if self.acceptable(line['Avg_Humidity'], data[3], 10):
+                        if self.acceptable(line['Avg_Humidity'], data[3], 25):
                             idealCount += 1
                         endDict[item].append(str(idealCount))
 
@@ -225,8 +213,40 @@ class StorageLocation:
                 for score in endDict[key]:
                     print key + ' Score: ' + score
                 #print(line['giLatitude'], line['Longitude'], line['Avg_Humidity'], line['Avg_Temp'], line['Avg_Temp_Max'], line['Avg_Temp_Min'])
+                #creates DataFrame from the endDict
+            dicti = pd.DataFrame(endDict)
+            dicti.to_csv("dfEndDic.csv")
+
+            inputFileName = "dfEndDic.csv"
+            outputFileName = os.path.splitext(inputFileName)[0] + "_modified.csv"
+
+            with open(inputFileName, 'rb') as inFile, open(outputFileName, 'wb') as outfile:
+                r = csv.reader(inFile)
+                w = csv.writer(outfile)
+
+                next(r, None)  # skip the first row from the reader, the old header
+                # write new header
+                w.writerow(['index', 'corn', 'rice'])
+                # copy the rest
+                for row in r:
+                    w.writerow(row)
+
+            data = pd.read_csv('dfEndDic_modified.csv')
+            data1 = pd.read_csv('MOCK_DATA.csv')
+            out = data.join(data1, on='index',how='left',lsuffix='_left')
+            out.to_csv('out.csv')
 
 
+
+    # def idealCsv():
+    #     with open('dict.csv', 'wb') as csv_file:
+    #         writer = csv.writer(csv_file)
+    #         for key, value in dictionary.items():
+    #             writer.writerow([key, value])
+    #     with open('dict.csv', 'rb') as csv_file:
+    #         reader = csv.reader(csv_file)
+    #         dictionary = dict(reader)
+    #         print done
 
     def acceptable(self, val1, val2, thresh):
         if abs(int(val1) - int(val2)) < thresh:
