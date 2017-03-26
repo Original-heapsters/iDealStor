@@ -6,14 +6,48 @@
         <p> {{ arg }} </p>
       {% endfor %}
     {% endif %}
+    {% if crops is not none %}
+      {% for key, value in crops.items() %}
+        {% for crops in value %}
+          <table>
+            <tr>
+          {% for crop, cropData in crops.items() %}
+          <td>
+            <div class="w3-container">
+              <center>
+              <h2>{{ cropData["name"] }}</h2>
+            </center>
+              <div class="w3-card-4" style="width:100%">
+                <img src="{{ url_for('static', filename = cropData["img"]) }}" style="width:100%">
+                <div class="w3-container w3-center">
+                  <table>
+                    <tr>
+                  {% for temp in cropData["temperatures"] %}
+                        <td><p> {{ temp }} </p>
+                  {% endfor %}
+                </tr>
+                <tr>
+              {% for temp in cropData["temperatures"] %}
+                    <td><p>{{ cropData["temperatures"][temp] }} </p>
+              {% endfor %}
+            </tr>
+                </table>
+                  </div>
+                </div>
+              </div>
+            </td>
+          {% endfor %}
+        </tr>
+        </table>
+        {% endfor %}
+      {%endfor %}
+    {% endif %}
 </div>
 <div class=aside>
     <h3>Config data</h3>
     <form method="post" action="{{ url_for('type_of_food') }}">
-        First name:<br>
-        <input type="text" name="firstname">
-        <br> Last name:<br>
-        <input type="text" name="lastname">
+        Type of food:<br>
+        <input type="text" name="TYPEOFFOOD">
         <br>
         <input type="submit" value="Submit">
     </form>

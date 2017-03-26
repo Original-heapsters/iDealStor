@@ -1,0 +1,45 @@
+{
+    "coord": {
+        "lon": -87.65,
+        "lat": 41.85
+    },
+    "weather": [{
+        "id": 501,
+        "main": "Rain",
+        "description": "moderate rain",
+        "icon": "10n"
+    }, {
+        "id": 701,
+        "main": "Mist",
+        "description": "mist",
+        "icon": "50n"
+    }],
+    "base": "stations",
+    "main": {
+        "temp": 281.49,
+        "pressure": 1015,
+        "humidity": 93,
+        "temp_min": 279.15,
+        "temp_max": 284.15
+    },
+    "visibility": 4828,
+    "wind": {
+        "speed": 4.1,
+        "deg": 40
+    },
+    "clouds": {
+        "all": 90
+    },
+    "dt": 1490497920,
+    "sys": {
+        "type": 1,
+        "id": 962,
+        "message": 0.005,
+        "country": "US",
+        "sunrise": 1490528574,
+        "sunset": 1490573397
+    },
+    "id": 4887398,
+    "name": "Chicago",
+    "cod": 200
+}

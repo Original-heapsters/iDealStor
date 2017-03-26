@@ -1,4 +1,5 @@
 {% extends "layout.html" %} {% block body %}
+
 <div class=main>
     <h1>Storage Location</h1>
     {% if args is not none %}
@@ -10,14 +11,33 @@
     <a href="https://plot.ly/~jeimmi/10/?share_key=L7WCI98VH8GYAGfH46bqvW" target="_blank" title="Avg_Temp" style="display: block; text-align: center;"><img src="https://plot.ly/~jeimmi/10.png?share_key=L7WCI98VH8GYAGfH46bqvW" alt="Avg_Temp" style="max-width: 100%;width: 600px;"  width="600" onerror="this.onerror=null;this.src='https://plot.ly/404.png';" /></a>
     <script data-plotly="jeimmi:10" sharekey-plotly="L7WCI98VH8GYAGfH46bqvW" src="https://plot.ly/embed.js" async></script>
     </div>
+    <table>
+  <tr>
+    <th>Company</th>
+    <th>Contact</th>
+    <th>Country</th>
+  </tr>
+  <tr>
+    <td>Alfreds Futterkiste</td>
+    <td>Maria Anders</td>
+    <td>Germany</td>
+  </tr>
+</table>
+    <p>AVG MAX: {{ tempMax }}</p>
+    <p>AVG MIN: {{ tempMin }}</p>
+    <p>AVG TEMP: {{ temp }}</p>
+    <p>HUMIDITY: {{ humidity }}</p>
+    {{googlemap("simple-map", lat, long, varname="simplemap")}}
+</div>
 </div>
 <div class=aside>
     <h3>Config data</h3>
+
     <form method="post" action="{{ url_for('storage_location') }}">
-        First name:<br>
-        <input type="text" name="firstname">
-        <br> Last name:<br>
-        <input type="text" name="lastname">
+        Latitude:<br>
+        <input type="text" name="latitude" value="34.007597">
+        <br> Longitude:<br>
+        <input type="text" name="longitude" value="-118.431089">
         <br>
         <input type="submit" value="Submit">
     </form>
