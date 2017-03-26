@@ -66,7 +66,6 @@ class StorageLocation:
     def map(self):
         df = pd.read_csv('MOCK_DATA.csv')
         df.head()
-
         limits = [(0,19),(20,60),(61,90),(91,150),(151,200)]
         colors = ["rgb(0,116,217)","rgb(255,65,54)","rgb(133,20,75)","rgb(255,133,27)","lightgrey"]
         cities = []
@@ -82,7 +81,7 @@ class StorageLocation:
                 lat = df_sub['Latitude'],
                 text = df_sub['Avg_Temp'],
                 marker = dict(
-                    #size = df_sub['Avg_Temp']/scale,
+                    size = df['Avg_Temp'],
                     color = colors[i],
                     line = dict(width=0.5, color='rgb(40,40,40)'),
                     sizemode = 'area'
@@ -95,11 +94,13 @@ class StorageLocation:
                 showlegend = True,
                 geo = dict(
                     scope='world',
-                    projection=dict( type='equirectangular' ),
+                    showcontries= True,
+                    projection=dict( type='Robinson' ),
                     showland = True,
+                    mapscale = 1,
                     landcolor = 'rgb(217, 217, 217)',
-                    subunitwidth=1,
-                    countrywidth=1,
+                    subunitwidth=2,
+                    countrywidth=2,
                     subunitcolor="rgb(255, 255, 255)",
                     countrycolor="rgb(255, 255, 255)"
                 ),
@@ -107,6 +108,20 @@ class StorageLocation:
         fig = dict( data=cities, layout=layout )
         py.iplot( fig, validate=False, filename='Avg_Temp' )
         return (avgMax, avgMin, avgTemp, avgHumidity)
+
+    def getIdealScore(self, crop, stats):
+        csvdf = pd.read_csv('MOCK_DATA.csv')
+        cropdf = pd.DataFrame(crop)
+        joint = csvdf.join(cropdf)
+        for a in range(999):
+            joint.loc[a].id= crop['id']
+            joint.loc[a].ideal= crop['ideal']
+            joint.loc[a].img= crop['img']
+            joint.loc[a].max= crop['max']
+            joint.loc[a].min=  crop['min']
+            joint.loc[a].name= crop['name']
+        joint
+        joint.query()
 
 
 
