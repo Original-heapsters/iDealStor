@@ -2,6 +2,7 @@ import plotly.plotly as py
 import plotly.graph_objs as go
 import pandas as pd
 import requests
+import os
 import json
 import csv
 
@@ -146,8 +147,40 @@ class StorageLocation:
                 for score in endDict[key]:
                     print key + ' Score: ' + score
                 #print(line['giLatitude'], line['Longitude'], line['Avg_Humidity'], line['Avg_Temp'], line['Avg_Temp_Max'], line['Avg_Temp_Min'])
+                #creates DataFrame from the endDict
+            dicti = pd.DataFrame(endDict)
+            dicti.to_csv("dfEndDic.csv")
+
+            inputFileName = "dfEndDic.csv"
+            outputFileName = os.path.splitext(inputFileName)[0] + "_modified.csv"
+
+            with open(inputFileName, 'rb') as inFile, open(outputFileName, 'wb') as outfile:
+                r = csv.reader(inFile)
+                w = csv.writer(outfile)
+
+                next(r, None)  # skip the first row from the reader, the old header
+                # write new header
+                w.writerow(['index', 'corn', 'rice'])
+                # copy the rest
+                for row in r:
+                    w.writerow(row)
+
+            data = pd.read_csv('dfEndDic_modified.csv')
+            data1 = pd.read_csv('MOCK_DATA.csv')
+            out = data.join(data1, on='index',how='left',lsuffix='_left')
+            out.to_csv('out.csv')
 
 
+
+    # def idealCsv():
+    #     with open('dict.csv', 'wb') as csv_file:
+    #         writer = csv.writer(csv_file)
+    #         for key, value in dictionary.items():
+    #             writer.writerow([key, value])
+    #     with open('dict.csv', 'rb') as csv_file:
+    #         reader = csv.reader(csv_file)
+    #         dictionary = dict(reader)
+    #         print done
 
     def acceptable(self, val1, val2, thresh):
         if abs(int(val1) - int(val2)) < thresh:
