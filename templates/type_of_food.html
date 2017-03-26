@@ -1,11 +1,6 @@
 {% extends "layout.html" %} {% block body %}
 <div class=main>
     <h1>Type of food</h1>
-    {% if args is not none %}
-      {% for arg in args %}
-        <p> {{ arg }} </p>
-      {% endfor %}
-    {% endif %}
     {% if crops is not none %}
       {% for key, value in crops.items() %}
         {% for crops in value %}
@@ -13,11 +8,16 @@
             <tr>
           {% for crop, cropData in crops.items() %}
           <td>
+
             <div class="w3-container">
               <center>
               <h2>{{ cropData["name"] }}</h2>
             </center>
-              <div class="w3-card-4" style="width:100%">
+              {% if cropData["name"] in args %}
+              <div class="w3-card-4 w3-blue" style="width:100%">
+                {% else %}
+                <div class="w3-card-4" style="width:100%">
+                {% endif %}
                 <img src="{{ url_for('static', filename = cropData["img"]) }}" style="width:100%">
                 <div class="w3-container w3-center">
                   <table>
@@ -42,12 +42,27 @@
         {% endfor %}
       {%endfor %}
     {% endif %}
+    {% if args is not none %}
+      {% for arg in args %}
+        <p> {{ arg }} </p>
+      {% endfor %}
+    {% endif %}
 </div>
 <div class=aside>
     <h3>Config data</h3>
     <form method="post" action="{{ url_for('type_of_food') }}">
-        Type of food:<br>
-        <input type="text" name="TYPEOFFOOD">
+      <table>
+      {% for key, value in crops.items() %}
+        {% for crops in value %}
+          {% for crop, cropData in crops.items() %}
+          <tr>
+            <td><input type="checkbox" name ="crops" value="{{ cropData["name"] }}">
+              <td>{{ cropData["name"] }}
+          </tr>
+          {% endfor %}
+        {% endfor %}
+      {% endfor %}
+    </table>
         <br>
         <input type="submit" value="Submit">
     </form>

@@ -30,16 +30,15 @@ def type_of_food():
     typeOfFood = TypeOfFood()
     typeOfFood.hello()
     crops = {}
-
+    crops = typeOfFood.getCropJSON(os.path.abspath('./CropTypes.json'))
 
     if request.method == 'POST':
-        if request.files is not None:
-            crops = json.loads(typeOfFood.getCropCSV())
         args = []
-        args.append(request.form['TYPEOFFOOD'])
+        for item in request.form.getlist('crops'):
+            args.append(item)
+
         return render_template('type_of_food.html', args=args, crops=crops)
     else:
-        crops = typeOfFood.getCropJSON(os.path.abspath('./CropTypes.json'))
         return render_template('type_of_food.html', crops=crops)
 
 
