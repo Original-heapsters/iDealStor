@@ -1,6 +1,7 @@
 {% extends "layout.html" %} {% block body %}
 <div class=main>
     <h1>Type of food</h1>
+    <form method="post" action="{{ url_for('type_of_food') }}">
     {% if crops is not none %}
       {% for key, value in crops.items() %}
         {% for crops in value %}
@@ -52,24 +53,7 @@
         <p> {{ arg }} </p>
       {% endfor %}
     {% endif %}
-</div>
-<div class=aside>
-    <h3>Config data</h3>
-    <form method="post" action="{{ url_for('type_of_food') }}">
-      <table>
-      {% for key, value in crops.items() %}
-        {% for crops in value %}
-          {% for crop, cropData in crops.items() %}
-          <tr>
-            <td><input type="checkbox" name ="crops" value="{{ cropData["name"] }}">
-              <td>{{ cropData["name"] }}
-          </tr>
-          {% endfor %}
-        {% endfor %}
-      {% endfor %}
-    </table>
-        <br>
-        <input type="submit" value="Submit">
-    </form>
+    <button type="submit" class="btn btn-primary" value="Submit">Plot dat shizz</button>
+  </form>
 </div>
 {% endblock %}

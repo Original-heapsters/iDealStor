@@ -1,5 +1,6 @@
 import plotly.plotly as py
 import plotly.graph_objs as go
+from plotly.graph_objs import *
 import pandas as pd
 import requests
 import json
@@ -90,6 +91,70 @@ class StorageLocation:
                 name = '{0} - {1}'.format(lim[0],lim[1]) )
             cities.append(city)
 
+        data = go.Data([
+    Scattermapbox(
+        lat=df['Latitude'],
+        lon=df['Longitude'],
+        mode='markers',
+        name='humidity',
+        marker=Marker(
+            size=df['Avg_Humidity']/10,
+            color='rgb(255, 0, 0)',
+            opacity=0.7
+        ),
+        text='locations_name',
+        hoverinfo='text'
+    ),Scattermapbox(
+        lat=df['Latitude'],
+        lon=df['Longitude'],
+        mode='markers',
+        name='avg temp',
+        marker=Marker(
+            size=df['Avg_Temp']/10,
+            color='rgb(255, 255, 0)',
+            opacity=0.7
+        ),
+        text='locations_name',
+        hoverinfo='text'
+    ),Scattermapbox(
+        lat=df['Latitude'],
+        lon=df['Longitude'],
+        mode='markers',
+        name='avg max temp',
+        marker=Marker(
+            size=df['Avg_Temp_Max']/10,
+            color='rgb(255, 0, 255)',
+            opacity=0.7
+        ),
+        text='locations_name',
+        hoverinfo='text'
+    ),Scattermapbox(
+        lat=df['Latitude'],
+        lon=df['Longitude'],
+        mode='markers',
+        name='avg min temp',
+        marker=Marker(
+            size=df['Avg_Temp_Min']/10,
+            color='rgb(134, 234, 234)',
+            opacity=0.7
+        ),
+        text='locations_name',
+        hoverinfo='text'
+    ),
+    Scattermapbox(
+        lat=df['Latitude'],
+        lon=df['Longitude'],
+        mode='markers',
+        name='avg max temp',
+        marker=Marker(
+            size=8,
+            color='rgb(142, 117, 112)',
+            opacity=0.7
+        ),
+        hoverinfo='skip'
+    )]
+)
+
         layout = dict(
                 title = 'Avg Temp Test',
                 showlegend = True,
@@ -106,9 +171,9 @@ class StorageLocation:
                     countrycolor="rgb(255, 255, 255)"
                 ),
             )
-        fig = dict( data=cities, layout=layout )
-        py.iplot( fig, validate=False, filename='Avg_Temp' )
-        return (avgMax, avgMin, avgTemp, avgHumidity)
+        fig = dict( data=data, layout=layout )
+        py.plot( fig, validate=False, filename='Avg_Temp', auto_open=False )
+        #return (avgMax, avgMin, avgTemp, avgHumidity)
 
     def getIdealScore(self, crop, stats):
         csvdf = pd.read_csv('MOCK_DATA.csv')
