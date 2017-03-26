@@ -1,6 +1,8 @@
 {% extends "layout.html" %} {% block body %}
 <div class=main>
-    <h1>Type of food</h1>
+    <center>
+      <h1>Crops</h1>
+    </center>
     <form method="post" action="{{ url_for('type_of_food') }}">
     {% if crops is not none %}
       {% for key, value in crops.items() %}
@@ -21,7 +23,6 @@
                 {% endif %}
                 <img class="card-img-top" src="{{ url_for('static', filename = cropData["img"]) }}" height="350" width="350">
                 <div class="card-block">
-                  <h4 class="card-title">{{ cropData["name"] }}</h4>
                   <table class="table table-condensed">
                     <tr>
                   {% for temp in cropData["temperatures"] %}
