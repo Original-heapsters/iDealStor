@@ -55,12 +55,13 @@ def storage_location():
 
     storageLocation = StorageLocation()
     storageLocation.hello()
-
+    storageLocation.map()
     if request.method == 'POST':
         args = []
         args.append(request.form['firstname'])
         args.append(request.form['lastname'])
         return render_template('storage_location.html', args=args)
+
     else:
         return render_template('storage_location.html')
 

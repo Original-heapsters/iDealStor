@@ -10,101 +10,46 @@ class StorageLocation:
    def hello(self):
      print "Hello storage location"
 
-df = pd.read_csv('storage_loc1.csv')
-df.head()
+   def map(self):
+    df = pd.read_csv('MOCK_DATA.csv')
+    df.head()
 
-cases = []
-colors = ['rgb(239,243,255)','rgb(189,215,231)','rgb(107,174,214)','rgb(33,113,181)']
-months = {6:'June',7:'July',8:'Aug',9:'Sept'}
+    limits = [(0,19),(20,60),(61,90),(91,150),(151,200)]
+    colors = ["rgb(0,116,217)","rgb(255,65,54)","rgb(133,20,75)","rgb(255,133,27)","lightgrey"]
+    cities = []
+    scale = 5000
 
-for i in range(6,10)[::-1]:
-    cases.append( dict(
-        type = 'scattergeo',
-        lon = df[ df['Month'] == i ]['lon'],
-        lat = df[ df['Month'] == i ]['lat'],
-        text = df[ df['Month'] == i ]['Value'],
-        sizemode = 'diameter',
-        name = months[i],
-        marker = dict(
-            size = df[ df['Month'] == i ]['Value']/50,
-            color = colors[i-6],
-            line = dict(width = 0)
-        ),
-        tick0 = 0,
-        zmin = 0,
-        dtick = 1000,
-        colorbar = dict(
-            autotick = False,
-            tickprefix = '',
-            title = ''
-        ),
-    ) )
+    for i in range(len(limits)):
+        lim = limits[i]
+        df_sub = df[lim[0]:lim[1]]
+        city = dict(
+            type = 'scattergeo',
+            locationmode = 'ISO-3',
+            lon = df_sub['Longitude'],
+            lat = df_sub['Latitude'],
+            text = df_sub['Avg_Temp'],
+            marker = dict(
+                #size = df_sub['Avg_Temp']/scale,
+                color = colors[i],
+                line = dict(width=0.5, color='rgb(40,40,40)'),
+                sizemode = 'area'
+            ),
+            name = '{0} - {1}'.format(lim[0],lim[1]) )
+        cities.append(city)
 
-cases[0]['text'] = df[ df['Month'] == 9 ]['Value'].map('{:.0f}'.format).astype(str)+' '+\
-    df[ df['Month'] == 9 ]['Country']
-cases[0]['mode'] = 'markers+text'
-cases[0]['textposition'] = 'bottom center'
-
-inset = [
-    dict(
-        type = 'choropleth',
-        locationmode = 'country names',
-        locations = df[ df['Month'] == 9 ]['Country'],
-        z = df[ df['Month'] == 9 ]['Value'],
-        text = df[ df['Month'] == 9 ]['Country'],
-        colorscale = [[0,'rgb(0, 0, 0)'],[1,'rgb(0, 0, 0)']],
-        autocolorscale = False,
-        showscale = False,
-        geo = 'geo2'
-    ),
-    dict(
-        type = 'scattergeo',
-        lon = [23],
-        lat = [103],
-        text = ['Mexico'],
-        mode = 'text',
-        showlegend = False,
-        geo = 'geo2'
-    )
-]
-
-layout = dict(
-    title = 'Test',
-    geo = dict(
-        resolution = 50,
-        scope = 'mexico',
-        showframe = False,
-        showcoastlines = True,
-        showland = True,
-        landcolor = "rgb(229, 229, 229)",
-        countrycolor = "rgb(255, 255, 255)" ,
-        coastlinecolor = "rgb(255, 255, 255)",
-        projection = dict(
-            type = 'Mercator'
-        ),
-        lonaxis = dict( range= [ -15.0, -5.0 ] ),
-        lataxis = dict( range= [ 0.0, 12.0 ] ),
-        domain = dict(
-            x = [ 0, 1 ],
-            y = [ 0, 1 ]
+    layout = dict(
+            title = 'Avg Temp Test',
+            showlegend = True,
+            geo = dict(
+                scope='world',
+                projection=dict( type='equirectangular' ),
+                showland = True,
+                landcolor = 'rgb(217, 217, 217)',
+                subunitwidth=1,
+                countrywidth=1,
+                subunitcolor="rgb(255, 255, 255)",
+                countrycolor="rgb(255, 255, 255)"
+            ),
         )
-    ),
-    geo2 = dict(
-        scope = 'mexico',
-        showframe = False,
-        showland = True,
-        landcolor = "rgb(229, 229, 229)",
-        showcountries = False,
-        domain = dict(
-            x = [ 0, 10],
-            y = [ 0, 10 ]
-        ),
-        bgcolor = 'rgba(255, 255, 255, 0.0)',
-    ),
-    legend = dict(
-           traceorder = 'reversed'
-    )
-)
-
-fig = { 'layout':layout, 'data':cases+inset }
-url = py.plot( fig, validate=False, filename='Test' )
+    fig = dict( data=cities, layout=layout )
+    py.iplot( fig, validate=False, filename='Avg_Temp' )
