@@ -110,19 +110,6 @@ class StorageLocation:
         py.iplot( fig, validate=False, filename='Avg_Temp' )
         return (avgMax, avgMin, avgTemp, avgHumidity)
 
-    def getIdealScore(self, crop, stats):
-        csvdf = pd.read_csv('MOCK_DATA.csv')
-        cropdf = pd.DataFrame(crop)
-        joint = csvdf.join(cropdf)
-        for a in range(999):
-            joint.loc[a].id= crop['id']
-            joint.loc[a].ideal= crop['ideal']
-            joint.loc[a].img= crop['img']
-            joint.loc[a].max= crop['max']
-            joint.loc[a].min=  crop['min']
-            joint.loc[a].name= crop['name']
-        joint
-        joint.query()
 
     def getIdealScores(self, cropDict):
         deEfs = []
@@ -143,13 +130,13 @@ class StorageLocation:
                 idealCount = 0
                 for crop in deEfs:
                     for item,data in crop.items():
-                        if self.acceptable(line['Avg_Temp'], data[0], 10):
+                        if self.acceptable(line['Avg_Temp'], data[0], 25):
                             idealCount += 1
-                        if self.acceptable(line['Avg_Temp_Min'], data[1], 10):
+                        if self.acceptable(line['Avg_Temp_Min'], data[1], 25):
                             idealCount += 1
-                        if self.acceptable(line['Avg_Temp_Max'], data[2], 10):
+                        if self.acceptable(line['Avg_Temp_Max'], data[2], 25):
                             idealCount += 1
-                        if self.acceptable(line['Avg_Humidity'], data[3], 10):
+                        if self.acceptable(line['Avg_Humidity'], data[3], 25):
                             idealCount += 1
                         print 'IdealScore ' + str(idealCount)
                 #print(line['giLatitude'], line['Longitude'], line['Avg_Humidity'], line['Avg_Temp'], line['Avg_Temp_Max'], line['Avg_Temp_Min'])
