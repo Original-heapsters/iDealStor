@@ -4,41 +4,46 @@
     {% if crops is not none %}
       {% for key, value in crops.items() %}
         {% for crops in value %}
-          <table>
+        <div class="container">
+          <table class="table table-condensed">
             <tr>
           {% for crop, cropData in crops.items() %}
           <td>
-
             <div class="w3-container">
               <center>
               <h2>{{ cropData["name"] }}</h2>
             </center>
               {% if cropData["name"] in args %}
-              <div class="w3-card-4 w3-blue" style="width:100%">
+              <div class="card" style="width: 20rem;">
                 {% else %}
                 <div class="w3-card-4" style="width:100%">
                 {% endif %}
-                <img src="{{ url_for('static', filename = cropData["img"]) }}" style="width:100%">
-                <div class="w3-container w3-center">
-                  <table>
+                <img class="card-img-top" src="{{ url_for('static', filename = cropData["img"]) }}" height="350" width="350">
+                <div class="card-block">
+                  <h4 class="card-title">{{ cropData["name"] }}</h4>
+                  <table class="table table-condensed">
                     <tr>
                   {% for temp in cropData["temperatures"] %}
-                        <td><p> {{ temp }} </p>
+                        <td><p class="card-text" > {{ temp }} </p>
                   {% endfor %}
                 </tr>
                 <tr>
               {% for temp in cropData["temperatures"] %}
-                    <td><p>{{ cropData["temperatures"][temp] }} </p>
+                    <td><p class="card-text" >{{ cropData["temperatures"][temp] }} </p>
               {% endfor %}
+            </tr>
+            <tr>
+              <td colspan="4" onclick="this.style.backgroundColor = 'LightBlue';"><label><input type="checkbox" name ="crops" value="{{ cropData["name"] }}"></label></td>
             </tr>
                 </table>
                   </div>
                 </div>
               </div>
-            </td>
+          </div>
           {% endfor %}
         </tr>
         </table>
+      </div>
         {% endfor %}
       {%endfor %}
     {% endif %}
