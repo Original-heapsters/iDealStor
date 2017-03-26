@@ -77,7 +77,7 @@ def storage_location():
         tempMax=tempMax,
         tempMin=tempMin,
         temp=temp,
-        humidity=humidity, 
+        humidity=humidity,
         lat=lat,
         long=long)
     else:

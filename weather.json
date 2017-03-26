@@ -1,106 +1,45 @@
 {
-    "cnt": 4,
-    "city_id": 4887398,
-    "list": [{
-            "weather": [{
-                "main": "Clouds",
-                "id": 802,
-                "icon": "03d",
-                "description": "scattered clouds"
-            }],
-            "dt": 1485703465,
-            "main": {
-                "temp": 268.987,
-                "grnd_level": 1001.11,
-                "temp_max": 268.987,
-                "sea_level": 1024.68,
-                "humidity": 100,
-                "pressure": 1001.11,
-                "temp_min": 268.987
-            },
-            "clouds": {
-                "all": 48
-            },
-            "wind": {
-                "speed": 5.06,
-                "deg": 291.002
-            }
-        },
-        {
-            "weather": [{
-                "main": "Clouds",
-                "id": 802,
-                "icon": "03d",
-                "description": "scattered clouds"
-            }],
-            "dt": 1485730032,
-            "main": {
-                "temp": 268.097,
-                "grnd_level": 1003.57,
-                "temp_max": 268.097,
-                "sea_level": 1027.08,
-                "humidity": 100,
-                "pressure": 1003.57,
-                "temp_min": 268.097
-            },
-            "clouds": {
-                "all": 44
-            },
-            "wind": {
-                "speed": 8.56,
-                "deg": 314.007
-            }
-        },
-        {
-            "weather": [{
-                "main": "Clear",
-                "id": 800,
-                "icon": "01n",
-                "description": "Sky is Clear"
-            }],
-            "dt": 1485755383,
-            "main": {
-                "temp": 266.787,
-                "grnd_level": 1005.73,
-                "temp_max": 266.787,
-                "sea_level": 1029.63,
-                "humidity": 100,
-                "pressure": 1005.73,
-                "temp_min": 266.787
-            },
-            "clouds": {
-                "all": 0
-            },
-            "wind": {
-                "speed": 6.79,
-                "deg": 316.012
-            }
-        },
-        {
-            "weather": [{
-                "main": "Clear",
-                "id": 800,
-                "icon": "01n",
-                "description": "sky is clear"
-            }],
-            "dt": 1485780512,
-            "main": {
-                "pressure": 1015,
-                "temp_min": 262.15,
-                "temp_max": 265.15,
-                "temp": 263.64,
-                "humidity": 57
-            },
-            "clouds": {
-                "all": 1
-            },
-            "wind": {
-                "speed": 2.6,
-                "deg": 280
-            }
-        }
-    ],
-    "cod": "200",
-    "message": "",
-    "calctime": 0.0863
+    "coord": {
+        "lon": -87.65,
+        "lat": 41.85
+    },
+    "weather": [{
+        "id": 501,
+        "main": "Rain",
+        "description": "moderate rain",
+        "icon": "10n"
+    }, {
+        "id": 701,
+        "main": "Mist",
+        "description": "mist",
+        "icon": "50n"
+    }],
+    "base": "stations",
+    "main": {
+        "temp": 281.49,
+        "pressure": 1015,
+        "humidity": 93,
+        "temp_min": 279.15,
+        "temp_max": 284.15
+    },
+    "visibility": 4828,
+    "wind": {
+        "speed": 4.1,
+        "deg": 40
+    },
+    "clouds": {
+        "all": 90
+    },
+    "dt": 1490497920,
+    "sys": {
+        "type": 1,
+        "id": 962,
+        "message": 0.005,
+        "country": "US",
+        "sunrise": 1490528574,
+        "sunset": 1490573397
+    },
+    "id": 4887398,
+    "name": "Chicago",
+    "cod": 200
 }

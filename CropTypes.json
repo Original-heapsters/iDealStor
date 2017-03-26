@@ -3,6 +3,7 @@
         "wheat": {
             "id": 1,
             "name": "Wheat",
+            "img" : "Wheat.jpg",
             "temperatures": {
                 "ideal": "70",
                 "min": "65",
@@ -12,6 +13,7 @@
         "rice": {
           "id": 2,
           "name": "Rice",
+          "img" : "Rice.jpg",
           "temperatures": {
               "ideal": "75",
               "min": "55",
@@ -21,6 +23,7 @@
         "corn": {
           "id": 3,
           "name": "Corn",
+          "img" : "Corn.jpg",
           "temperatures": {
               "ideal": "80",
               "min": "50",
